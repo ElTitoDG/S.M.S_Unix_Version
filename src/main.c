@@ -1,8 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "../src/smslib.h"
+
+void title();
 
 int main(int argc, char *argv[]) {
 
-    printf("Hello World\n");
+    title();
 
     return 0;
 }
