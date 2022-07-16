@@ -60,11 +60,11 @@ SRCEXT := c
 
 
 # Defines the C Compiler
-CC := gcc
+CC := clang
 
 
 # Defines the language standards for GCC
-STD := -std=gnu99 # See man gcc for more options
+STD := -std=c11 # See man gcc for more options
 
 # Protection for stack-smashing attack
 STACK := -fstack-protector-all -Wstack-protector
