@@ -41,14 +41,15 @@ int main() {
         printf("\n\n\t\t\t\t4. Individual View(WIP)");
         printf("\n\n\t\t\t\t5. Remove Student(WIP)");
         printf("\n\n\t\t\t\t6. Change Password(WIP)");
-        printf("\n\n\t\t\t\t7. Logout\n\n\t");
+        printf("\n\n\t\t\t\t7. Info(WIP)");
+        printf("\n\n\t\t\t\t8. Logout\n\n\t");
         printChar('*', 65);
 
         printf("\n\n\t\t\t\tEnter your option: ");
         scanf("%d", &option);
 
         switch (option) {
-            case 7:
+            case 8:
                 return 1;
                 break;
             default:

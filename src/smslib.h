@@ -5,4 +5,6 @@ void printChar(char ch, int n);
 
 void title();
 
+int checkIfFileExists(const char* filename);
+
 #endif // __SMSLIB_H__

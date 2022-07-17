@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../src/smslib.h"
+#include <sys/stat.h>
 
 // region: --- Terminal Colors
 
@@ -33,6 +35,21 @@ void title()
     printf(" Student Management System ");
     printChar('=', 19);
     printf(KNRM "\n");
+}
+
+int checkIfFileExists(const char* filename)
+{
+    struct stat buffer;
+    int exist = stat(filename, &buffer);
+    if (exist == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        printf("File doesn't exists\n");
+        return 0;
+    }
 }
 
 // endregion: --- Lib functions
