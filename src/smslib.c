@@ -53,7 +53,7 @@ int checkIfFileExists(const char* filename)
     }
 }
 
-char printFileContent(const char* filename)
+int printFileContent(const char* filename)
 {
     char c;
 

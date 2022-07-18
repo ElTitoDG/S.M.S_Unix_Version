@@ -11,7 +11,7 @@
 void title();
 void printChar(char ch, int n);
 int printFileContent(const char* filename);
-int checkIfFileExits(const char* filename);
+int checkIfFileExists(const char* filename);
 
 // endregion: --- Lib functions
 
@@ -56,7 +56,7 @@ int main() {
 
         switch (option) {
             case 7:
-                if (checkIfFileExits("test/a.txt")) {
+                if (checkIfFileExists("test/a.txt")) {
                     printFileContent("test/a.txt");
                 } else
                 {
