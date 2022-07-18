@@ -7,4 +7,6 @@ void title();
 
 int checkIfFileExists(const char* filename);
 
+int printFileContent(const char* filename);
+
 #endif // __SMSLIB_H__

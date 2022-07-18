@@ -6,8 +6,14 @@
 #include <unistd.h>
 #include "../src/smslib.h"
 
+// region: --- Lib functions
+
 void title();
 void printChar(char ch, int n);
+int printFileContent(const char* filename);
+int checkIfFileExits(const char* filename);
+
+// endregion: --- Lib functions
 
 int main() {
 
@@ -49,6 +55,13 @@ int main() {
         scanf("%d", &option);
 
         switch (option) {
+            case 7:
+                if (checkIfFileExits("test/a.txt")) {
+                    printFileContent("test/a.txt");
+                } else
+                {
+                    printf("not exits");
+                }
             case 8:
                 return 1;
                 break;

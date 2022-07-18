@@ -17,6 +17,7 @@
 
 // endregion: --- Terminal Colors
 
+FILE *fptr;
 
 // region: --- Lib functions
 
@@ -50,6 +51,36 @@ int checkIfFileExists(const char* filename)
         printf("File doesn't exists\n");
         return 0;
     }
+}
+
+char printFileContent(const char* filename)
+{
+    char c;
+
+//    printf("\n");
+//    printf("Enter the filename to open: ");
+//    scanf("%s", filename);
+
+    //Open file
+    fptr = fopen(filename, "r");
+    if (fptr == NULL)
+    {
+        printf("\nCannot open the file \n");
+        printf("\n");
+        exit(0);
+    }
+
+    //Read content of the file and print it
+    c = fgetc(fptr);
+    while (c != EOF)
+    {
+        printf("%c", c);
+        c = fgetc(fptr);
+    }
+    printf("\n");
+
+    fclose(fptr);
+    return 0;
 }
 
 // endregion: --- Lib functions
