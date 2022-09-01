@@ -5,6 +5,8 @@ void printChar(char ch, int n);
 
 void title();
 
+void mainmenu();
+
 int checkIfFileExists(const char* filename);
 
 int printFileContent(const char* filename);

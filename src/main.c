@@ -9,6 +9,7 @@
 // region: --- Lib functions
 
 void title();
+void mainmenu();
 void printChar(char ch, int n);
 int printFileContent(const char* filename);
 int checkIfFileExists(const char* filename);
@@ -38,20 +39,8 @@ int main() {
     while (1) {
 
         title();
-        printf("\n\t");
-        printChar('*', 65);
+        mainmenu();
 
-        printf("\n\n\t\t\t\t1. Add Student(WIP)");
-        printf("\n\n\t\t\t\t2. Modify Student(WIP)");
-        printf("\n\n\t\t\t\t3. Show all Students(WIP)");
-        printf("\n\n\t\t\t\t4. Individual View(WIP)");
-        printf("\n\n\t\t\t\t5. Remove Student(WIP)");
-        printf("\n\n\t\t\t\t6. Change Password(WIP)");
-        printf("\n\n\t\t\t\t7. Info(WIP)");
-        printf("\n\n\t\t\t\t8. Logout\n\n\t");
-        printChar('*', 65);
-
-        printf("\n\n\t\t\t\tEnter your option: ");
         scanf("%d", &option);
 
         switch (option) {

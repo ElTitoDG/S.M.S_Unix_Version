@@ -19,6 +19,17 @@
 
 FILE *fptr;
 
+
+// region: --- Structures
+
+struct pass
+{
+    char pass[25];
+
+}pa;
+
+// endregion: --- Structures
+
 // region: --- Lib functions
 
 void printChar(char ch, int n)
@@ -36,6 +47,24 @@ void title()
     printf(" Student Management System ");
     printChar('=', 19);
     printf(KNRM "\n");
+}
+
+void mainmenu()
+{
+    printf("\n\t");
+    printChar('*', 65);
+
+    printf("\n\n\t\t\t\t1. Add Student(WIP)");
+    printf("\n\n\t\t\t\t2. Modify Student(WIP)");
+    printf("\n\n\t\t\t\t3. Show all Students(WIP)");
+    printf("\n\n\t\t\t\t4. Individual View(WIP)");
+    printf("\n\n\t\t\t\t5. Remove Student(WIP)");
+    printf("\n\n\t\t\t\t6. Change Password(WIP)");
+    printf("\n\n\t\t\t\t7. Info(WIP)");
+    printf("\n\n\t\t\t\t8. Logout\n\n\t");
+    printChar('*', 65);
+
+    printf("\n\n\t\t\t\tEnter your option: ");
 }
 
 int checkIfFileExists(const char* filename)
@@ -81,6 +110,12 @@ int printFileContent(const char* filename)
 
     fclose(fptr);
     return 0;
+}
+
+void password()
+{
+    char c;
+    printf("\nEnter new password: ");
 }
 
 // endregion: --- Lib functions
