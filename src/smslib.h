@@ -11,4 +11,6 @@ int checkIfFileExists(const char* filename);
 
 int printFileContent(const char* filename);
 
+void password();
+
 #endif // __SMSLIB_H__

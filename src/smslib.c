@@ -116,6 +116,24 @@ void password()
 {
     char c;
     printf("\nEnter new password: ");
+    fflush(stdin);
+    gets(pa.pass);
+    printf("\nSave Password (y/n): ");
+    fflush(stdin);
+    scanf("%c", &c);
+    if (c=='y' || c=='Y')
+    {
+        fptr = fopen("password.txt", "w+");
+        fwrite(&pa, sizeof(pa), 1, fptr);
+        fclose(fptr);
+        printf("\n\tPassword Saved\n");
+    }
+    else
+    {
+        printf("Password not saved: \n");
+        printf("Press any key to continue:");
+        getchar();
+    }
 }
 
 // endregion: --- Lib functions

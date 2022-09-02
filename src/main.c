@@ -13,6 +13,8 @@ void mainmenu();
 void printChar(char ch, int n);
 int printFileContent(const char* filename);
 int checkIfFileExists(const char* filename);
+void password();
+
 
 // endregion: --- Lib functions
 
@@ -44,6 +46,12 @@ int main() {
         scanf("%d", &option);
 
         switch (option) {
+            case 6:
+                password();
+                sleep(1);
+                printf("\n\t\tPress any key to continue\n\n\n");
+                getchar();
+                break;
             case 7:
                 if (checkIfFileExists("test/a.txt")) {
                     printFileContent("test/a.txt");
@@ -51,12 +59,16 @@ int main() {
                 {
                     printf("not exits");
                 }
+                sleep(1);
+                printf("\n\t\tPress any key to continue\n\n\n");
+                getchar();
+                break;
             case 8:
                 return 1;
                 break;
             default:
                 printf("\n\t\tNo action selected");
-                printf("\n\t\tPress any key\n\n\n");
+                printf("\n\t\tPress any key to continue\n\n\n");
                 sleep(1);
                 getchar();
         }
