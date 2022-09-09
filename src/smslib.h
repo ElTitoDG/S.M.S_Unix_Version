@@ -13,4 +13,6 @@ int printFileContent(const char* filename);
 
 void password();
 
+void add();
+
 #endif // __SMSLIB_H__

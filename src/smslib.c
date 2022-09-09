@@ -19,14 +19,26 @@
 
 FILE *fptr;
 
+FILE* fp;
 
 // region: --- Structures
+
+#define Student struct Stud
 
 struct pass
 {
     char pass[25];
 
 }pa;
+
+struct Stud
+{
+    char name[50];
+    char dept[50];
+    int roll;
+    float sgpa[12];
+    float cgpa;
+};
 
 // endregion: --- Structures
 
@@ -133,6 +145,48 @@ void password()
         printf("Password not saved: \n");
         printf("Press any key to continue:");
         getchar();
+    }
+}
+
+void add()
+{
+    title();
+
+    char another = 'y';
+    Student s;
+    int i;
+    float cgpa;
+
+    fseek(fp, 0, SEEK_END);
+    while (another=='y'||another=='Y') {
+        printf("\n\n\t\tEnter Full Name of Student: ");
+        fflush(stdin);
+        fgets(s.name, 100, stdin);
+        s.name[strlen(s.name)-1] = '\0';
+
+        printf("\n\n\t\tEnter Departament Name: ");
+        fflush(stdin);
+        fgets(s.dept, 50, stdin);
+        s.dept[strlen(s.dept)-1] = '\0';
+
+        printf("\n\n\t\tEnter Roll Number: ");
+        scanf("%d", &s.roll);
+
+        printf("\n\n\t\tEnter SGPA for 12 semesters: ");
+        for(i=0, cgpa=0; i<12; i++)
+        {
+            scanf("%f", &s.sgpa[i]);
+            cgpa += s.sgpa[i];
+        }
+
+        cgpa /= 12.0;
+        s.cgpa = cgpa;
+
+        fwrite(&s, sizeof(s), 1, fp);
+
+        printf("\n\n\t\tAdd another student?(Y/N)");
+        fflush(stdin);
+        another = getchar();
     }
 }
 

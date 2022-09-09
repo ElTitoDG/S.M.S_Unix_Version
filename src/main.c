@@ -14,6 +14,7 @@ void printChar(char ch, int n);
 int printFileContent(const char* filename);
 int checkIfFileExists(const char* filename);
 void password();
+void add();
 
 
 // endregion: --- Lib functions
@@ -46,6 +47,9 @@ int main() {
         scanf("%d", &option);
 
         switch (option) {
+            case 1:
+               add();
+               break;
             case 6:
                 password();
                 sleep(1);

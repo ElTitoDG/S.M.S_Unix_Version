@@ -100,7 +100,7 @@ OBJECTS :=$(patsubst %,$(LIBDIR)/%.o,$(NAMES))
 # COMPILATION RULES
 #
 
-default: all
+default: all run
 
 # Help message
 help:
@@ -133,6 +133,9 @@ all: $(OBJECTS)
 	@echo -en "\n--\nBinary file placed at" \
 			  "$(BROWN)$(BINDIR)/$(BINARY)$(END_COLOR)\n";
 
+# Run command
+run:
+	./$(BINDIR)/$(BINARY)
 
 # Rule for object binaries compilation
 $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
