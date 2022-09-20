@@ -157,37 +157,11 @@ void add()
     int i;
     float cgpa;
 
-    fseek(fp, 0, SEEK_END);
-    while (another=='y'||another=='Y') {
-        printf("\n\n\t\tEnter Full Name of Student: ");
-        fflush(stdin);
-        fgets(s.name, 100, stdin);
-        s.name[strlen(s.name)-1] = '\0';
-
-        printf("\n\n\t\tEnter Departament Name: ");
-        fflush(stdin);
-        fgets(s.dept, 50, stdin);
-        s.dept[strlen(s.dept)-1] = '\0';
-
-        printf("\n\n\t\tEnter Roll Number: ");
-        scanf("%d", &s.roll);
-
-        printf("\n\n\t\tEnter SGPA for 12 semesters: ");
-        for(i=0, cgpa=0; i<12; i++)
-        {
-            scanf("%f", &s.sgpa[i]);
-            cgpa += s.sgpa[i];
-        }
-
-        cgpa /= 12.0;
-        s.cgpa = cgpa;
-
-        fwrite(&s, sizeof(s), 1, fp);
-
-        printf("\n\n\t\tAdd another student?(Y/N)");
-        fflush(stdin);
-        another = getchar();
+    if(checkIfFileExists("db.txt") == 0)
+    {
+        printf("File doesn't exits");
+        fptr = fopen("db.txt", "w+");
+        printf("File created succesfuly");
     }
 }
-
 // endregion: --- Lib functions

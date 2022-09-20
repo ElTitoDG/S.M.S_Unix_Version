@@ -5,7 +5,7 @@
 #include <curses.h>
 #include <unistd.h>
 #include "../src/smslib.h"
-
+#define sleep_time 1
 // region: --- Lib functions
 
 void title();
@@ -49,10 +49,12 @@ int main() {
         switch (option) {
             case 1:
                add();
+               sleep(sleep_time);
+               getchar();
                break;
             case 6:
                 password();
-                sleep(1);
+                sleep(sleep_time);
                 printf("\n\t\tPress any key to continue\n\n\n");
                 getchar();
                 break;
@@ -63,7 +65,7 @@ int main() {
                 {
                     printf("not exits");
                 }
-                sleep(1);
+                sleep(sleep_time);
                 printf("\n\t\tPress any key to continue\n\n\n");
                 getchar();
                 break;
@@ -73,7 +75,7 @@ int main() {
             default:
                 printf("\n\t\tNo action selected");
                 printf("\n\t\tPress any key to continue\n\n\n");
-                sleep(1);
+                sleep(sleep_time);
                 getchar();
         }
 
