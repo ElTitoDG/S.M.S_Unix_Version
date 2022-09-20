@@ -1,4 +1,5 @@
 #include "../src/smslib.h"
+#include "../deps/fs/fs.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -135,7 +136,7 @@ void password()
     {
         fptr = fopen("password.txt", "w+");
         fwrite(&pa, sizeof(pa), 1, fptr);
-        fclose(fptr);
+        fs_close(fptr);
         printf("\n\tPassword Saved\n");
     }
     else

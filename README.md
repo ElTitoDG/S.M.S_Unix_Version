@@ -8,7 +8,6 @@ I created this project with two objectives in mind:
 
 Also this project uses [C Project Template](https://github.com/pantuza/c-project-template) to generate the project structure and make file
 
-
 ## Warnings
 
 To compile this project with no problems you will need to create two folders inside of the project:

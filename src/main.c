@@ -1,4 +1,5 @@
 #include "../src/smslib.h"
+#include "../deps/fs/fs.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
