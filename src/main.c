@@ -1,10 +1,10 @@
+#include "../src/smslib.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <curses.h>
 #include <unistd.h>
-#include "../src/smslib.h"
 #define sleep_time 1
 // region: --- Lib functions
 

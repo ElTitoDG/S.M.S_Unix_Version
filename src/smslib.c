@@ -1,7 +1,7 @@
+#include "../src/smslib.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../src/smslib.h"
 #include <sys/stat.h>
 
 // region: --- Terminal Colors
@@ -18,8 +18,6 @@
 // endregion: --- Terminal Colors
 
 FILE *fptr;
-
-FILE* fp;
 
 // region: --- Structures
 
