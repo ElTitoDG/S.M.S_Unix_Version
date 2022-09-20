@@ -161,5 +161,7 @@ void add()
         fptr = fopen("db.txt", "w+");
         printf("File created succesfuly");
     }
+    printf("File exists");
+
 }
 // endregion: --- Lib functions
