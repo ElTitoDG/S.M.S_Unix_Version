@@ -69,8 +69,8 @@ void mainmenu()
     printf("\n\n\t\t\t\t3. Show all Students(WIP)");
     printf("\n\n\t\t\t\t4. Individual View(WIP)");
     printf("\n\n\t\t\t\t5. Remove Student(WIP)");
-    printf("\n\n\t\t\t\t6. Change Password(WIP)");
-    printf("\n\n\t\t\t\t7. Info(WIP)");
+    printf("\n\n\t\t\t\t6. Change Password");
+    printf("\n\n\t\t\t\t7. Info");
     printf("\n\n\t\t\t\t8. Logout\n\n\t");
     printChar('*', 65);
 
@@ -83,22 +83,18 @@ int checkIfFileExists(const char* filename)
     int exist = stat(filename, &buffer);
     if (exist == 0)
     {
-        return 1;
+        return EXIT_FAILURE;
     }
     else
     {
         printf("File doesn't exists\n");
-        return 0;
+        return EXIT_SUCCESS;
     }
 }
 
 int printFileContent(const char* filename)
 {
     char c;
-
-//    printf("\n");
-//    printf("Enter the filename to open: ");
-//    scanf("%s", filename);
 
     //Open file
     fptr = fopen(filename, "r");
@@ -150,18 +146,35 @@ void add()
 {
     title();
 
-    char another = 'y';
+    char c;
     Student s;
     int i;
-    float cgpa;
 
     if(checkIfFileExists("db.txt") == 0)
     {
-        printf("File doesn't exits");
+        printf("File doesn't exits\n");
         fptr = fopen("db.txt", "w+");
-        printf("File created succesfuly");
+        printf("File created succesfuly\n");
     }
-    printf("File exists");
+    else
+    {
+        printf("File exists\n");
+    }
+
+    printf("Add Student (y/n):");
+    fflush(stdin);
+    scanf("%c", &c);
+    while (c == 'y' || c == 'Y')
+    {
+        printf("Enter Student Name: ");
+        fflush(stdin);
+        gets(s.name);
+        fwrite(&s, sizeof(s), 1, fptr);
+        fclose(fptr);
+        c = getchar();
+    }
+
+
 
 }
 // endregion: --- Lib functions
