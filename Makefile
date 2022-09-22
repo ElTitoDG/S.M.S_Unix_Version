@@ -1,14 +1,14 @@
 #
 #
 #
-# Makefile template for C code
+# Modified Makefile template for C code
 #
-# Author: Gustavo Pantuza Coelho Pinto
+# Author: Julián Hinojosa Gil
+# Original Author: Gustavo Pantuza Coelho Pinto
 # Since: 24.03.2016
 #
 #
 #
-
 
 # Includes the project configurations
 include project.conf
@@ -26,12 +26,11 @@ ifndef PROJECT_PATH
 $(error Missing PROJECT_PATH. Put variables at project.conf file)
 endif
 
-
 # Gets the Operating system name
 OS := $(shell uname -s)
 
 # Default shell
-SHELL := bash
+SHELL := zsh
 
 # Color prefix for Linux distributions
 COLOR_PREFIX := e
@@ -79,10 +78,10 @@ CFLAGS := -O3 $(STD) $(STACK) $(WARNS)
 DEBUG := -g3 -DDEBUG=1
 
 # Dependency libraries
-LIBS := # -lm  -I some/path/to/library
+#LIBS :=  -lm  -I some/path/to/library
 
 # Test libraries
-TEST_LIBS := -l cmocka -L /usr/lib
+#TEST_LIBS := -l cmocka -L /usr/lib
 
 
 
@@ -104,27 +103,15 @@ default: all run
 
 # Help message
 help:
-	@echo "C Project Template"
+	@echo "$(BLUE)S.M.S Unix Version$(END_COLOR)"
 	@echo
 	@echo "Target rules:"
 	@echo "    all      - Compiles and generates binary file"
+	@echo "    run      - Run the current binary file"
 	@echo "    tests    - Compiles with cmocka and run tests binary file"
-	@echo "    start    - Starts a new project using C project template"
-	@echo "    valgrind - Runs binary file using valgrind tool"
 	@echo "    clean    - Clean the project by removing binaries"
 	@echo "    help     - Prints a help message with target rules"
-
-# Starts a new project using C project template
-start:
-	@echo "Creating project: $(PROJECT_NAME)"
-	@mkdir -pv $(PROJECT_PATH)
-	@echo "Copying files from template to new directory:"
-	@cp -rvf ./* $(PROJECT_PATH)/
 	@echo
-	@echo "Go to $(PROJECT_PATH) and compile your project: make"
-	@echo "Then execute it: bin/$(BINARY) --help"
-	@echo "Happy hacking o/"
-
 
 # Rule for link and generate the binary file
 all: $(OBJECTS)
@@ -165,4 +152,4 @@ tests:
 
 # Rule for cleaning the project
 clean:
-	@rm -rvf $(BINDIR)/* $(LIBDIR)/* $(LOGDIR)/*;
+	@rm -rvf $(BINDIR)/* $(LIBDIR)/* *.txt; #$(LOGDIR)/*

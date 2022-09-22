@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <sys/stat.h>
 
 // region: --- Terminal Colors
@@ -148,6 +149,9 @@ void add()
 
     char c;
     Student s;
+    //name
+    //dept
+    //roll
     int i;
 
     if(checkIfFileExists("db.txt") == 0)
@@ -162,13 +166,19 @@ void add()
         printf("File exists\n");
     }
 
+    printf("Enter Student name: ");
+    fflush(stdin);
+    gets(s.name);
+
     printf("Save Student (y/n): ");
     scanf("%c", &c);
     if (c == 'y' || c == 'Y')
     {
         fptr = fopen("db.txt", "w+");
+        fwrite(&s, sizeof(s), 1, fptr);
+        fclose(fptr);
         printf("It works");
-        getchar();
+        sleep(1);
     }
 
 
