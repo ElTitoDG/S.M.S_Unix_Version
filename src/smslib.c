@@ -155,24 +155,24 @@ void add()
         printf("File doesn't exits\n");
         fptr = fopen("db.txt", "w+");
         printf("File created succesfuly\n");
+        fclose(fptr);
     }
     else
     {
         printf("File exists\n");
     }
 
-    printf("Add Student (y/n):");
-    fflush(stdin);
+    printf("Save Student (y/n): ");
     scanf("%c", &c);
-    while (c == 'y' || c == 'Y')
+    if (c == 'y' || c == 'Y')
     {
-        printf("Enter Student Name: ");
-        fflush(stdin);
-        gets(s.name);
-        fwrite(&s, sizeof(s), 1, fptr);
-        fclose(fptr);
-        c = getchar();
+        fptr = fopen("db.txt", "w+");
+        printf("It works");
+        getchar();
     }
+
+
+
 
 
 
