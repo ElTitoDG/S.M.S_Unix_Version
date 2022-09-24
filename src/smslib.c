@@ -34,9 +34,6 @@ struct Stud
 {
     char name[50];
     char dept[50];
-    int roll;
-    float sgpa[12];
-    float cgpa;
 };
 
 // endregion: --- Structures
@@ -124,7 +121,7 @@ void password()
     char c;
     printf("\nEnter new password: ");
     fflush(stdin);
-    gets(pa.pass);
+    fgets(pa.pass, sizeof(pa.pass), stdin);
     printf("\nSave Password (y/n): ");
     fflush(stdin);
     scanf("%c", &c);
@@ -151,8 +148,6 @@ void add()
     Student s;
     //name
     //dept
-    //roll
-    int i;
 
     if(checkIfFileExists("db.txt") == 0)
     {
@@ -168,7 +163,11 @@ void add()
 
     printf("Enter Student name: ");
     fflush(stdin);
-    gets(s.name);
+    fgets(s.name, sizeof(s.name), stdin);
+    fprintf(fptr, "\n");
+    printf("Enter Departament: ");
+    fflush(stdin);
+    fgets(s.dept, sizeof(s.dept), stdin);
 
     printf("Save Student (y/n): ");
     scanf("%c", &c);

@@ -99,7 +99,7 @@ OBJECTS :=$(patsubst %,$(LIBDIR)/%.o,$(NAMES))
 # COMPILATION RULES
 #
 
-default: all run
+default: help
 
 # Help message
 help:
