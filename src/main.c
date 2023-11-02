@@ -15,6 +15,7 @@ int printFileContent(const char *filename);
 int checkIfFileExists(const char *filename);
 void password();
 void add();
+void show();
 
 // endregion: --- Lib functions
 
@@ -53,6 +54,7 @@ int main() {
       break;
     case 3:
       printf("Function Here\n");
+      show();
       sleep(sleep_time);
       printf("\n\t\tPress any key to continue\n\n\t");
       getchar();

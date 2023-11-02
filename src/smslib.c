@@ -154,8 +154,16 @@ void add() {
     fptr = fopen("db.txt", "w+");
     fwrite(&s, sizeof(s), 1, fptr);
     fclose(fptr);
-    printf("It works");
+    // printf("It works");
     sleep(1);
+  }
+}
+
+void show() {
+  if (checkIfFileExists("db.txt") == 0) {
+    printf("File doen't exist\n");
+  } else {
+    printFileContent("db.txt");
   }
 }
 // endregion: --- Lib functions

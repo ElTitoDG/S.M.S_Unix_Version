@@ -15,4 +15,6 @@ void password();
 
 void add();
 
+void show();
+
 #endif // __SMSLIB_H__
