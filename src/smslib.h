@@ -7,9 +7,9 @@ void title();
 
 void mainmenu();
 
-int checkIfFileExists(const char* filename);
+int checkIfFileExists(const char *filename);
 
-int printFileContent(const char* filename);
+void printFileContent(const char *filename);
 
 void password();
 
