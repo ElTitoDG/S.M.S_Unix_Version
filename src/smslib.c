@@ -144,7 +144,7 @@ void add() {
   fflush(stdin);
   fgets(s.name, sizeof(s.name), stdin);
   fprintf(fptr, "\n");
-  printf("Enter Departament: ");
+  printf("Enter University degree: ");
   fflush(stdin);
   fgets(s.dept, sizeof(s.dept), stdin);
 
