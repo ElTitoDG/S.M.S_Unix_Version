@@ -1,7 +1,5 @@
-#include "../src/smslib.h"
-#include <curses.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "../include/smslib.h"
+#include "../include/misclib.h"
 
 #define sleep_time 1
 

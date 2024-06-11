@@ -1,9 +1,5 @@
-#include "../src/smslib.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include "../include/smslib.h"
+#include "../include/misclib.h"
 
 // region: --- Terminal Colors
 
@@ -23,29 +19,11 @@ FILE *fptr;
 // region: --- Structures
 
 #define Student struct Stud
-
-struct pass
-{
-    char pass[25];
-} pa;
-
-struct Stud
-{
-    char name[50];
-    char dept[50];
-};
+#define Pass struct Pass
 
 // endregion: --- Structures
 
 // region: --- Lib functions
-
-void printChar(char ch, int n)
-{
-    while (n--)
-    {
-        putchar(ch);
-    }
-}
 
 void title()
 {
@@ -75,49 +53,11 @@ void mainmenu()
     printf("\n\n\t\t\t\tEnter your option: ");
 }
 
-int checkIfFileExists(const char *filename)
-{
-    struct stat buffer;
-    int exist = stat(filename, &buffer);
-    if (exist == 0)
-    {
-        return EXIT_FAILURE;
-    }
-    else
-    {
-        printf("File doesn't exists\n");
-        return EXIT_SUCCESS;
-    }
-}
-
-void printFileContent(const char *filename)
-{
-    char c;
-
-    // Open file
-    fptr = fopen(filename, "r");
-    if (fptr == NULL)
-    {
-        printf("\nCannot open the file \n");
-        printf("\n");
-        exit(0);
-    }
-
-    // Read content of the file and print it
-    c = fgetc(fptr);
-    while (c != EOF)
-    {
-        printf("%c", c);
-        c = fgetc(fptr);
-    }
-    printf("\n");
-
-    fclose(fptr);
-}
-
 void password()
 {
     char c;
+    Pass pa;
+
     printf("\nEnter new password: ");
     fflush(stdin);
     fgets(pa.pass, sizeof(pa.pass), stdin);
@@ -141,41 +81,6 @@ void password()
 
 void add()
 {
-    title();
-
-    char c;
-    Student s;
-    // name
-    // dept
-
-    if (checkIfFileExists("db.txt") == 0)
-    {
-        printf("File doesn't exits\n");
-        fptr = fopen("db.txt", "w+");
-        printf("File created succesfuly\n");
-        fclose(fptr);
-    }
-    else
-        printf("File exists\n");
-
-    printf("Enter Student name: ");
-    fflush(stdin);
-    fgets(s.name, sizeof(s.name), stdin);
-    fprintf(fptr, "\n");
-    printf("Enter University degree: ");
-    fflush(stdin);
-    fgets(s.dept, sizeof(s.dept), stdin);
-
-    printf("Save Student (y/n): ");
-    scanf("%c", &c);
-    if (c == 'y' || c == 'Y')
-    {
-        fptr = fopen("db.txt", "w+");
-        fwrite(&s, sizeof(s), 1, fptr);
-        fclose(fptr);
-        // printf("It works");
-        sleep(1);
-    }
 }
 
 void show()

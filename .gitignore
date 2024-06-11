@@ -58,3 +58,4 @@ src/a.txt
 password.txt
 db.txt
 db.txt
+tests/test_module

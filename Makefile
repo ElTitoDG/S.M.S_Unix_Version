@@ -44,8 +44,6 @@ BROWN=\$(COLOR_PREFIX)[0;33m
 BLUE=\$(COLOR_PREFIX)[1;34m
 END_COLOR=\$(COLOR_PREFIX)[0m
 
-
-
 # Source code directory structure
 BINDIR := bin
 SRCDIR := src
@@ -53,14 +51,11 @@ LOGDIR := log
 LIBDIR := lib
 TESTDIR := test
 
-
 # Source code file extension
 SRCEXT := c
 
-
 # Defines the C Compiler
 CC := clang
-
 
 # Defines the language standards for GCC
 STD := -std=c2x # See man gcc for more options
@@ -83,17 +78,12 @@ DEBUG := -g3 -DDEBUG=1
 # Test libraries
 #TEST_LIBS := -l cmocka -L /usr/lib
 
-
-
 # Tests binary file
 TEST_BINARY := $(BINARY)_test_runner
 
-
-
 # %.o file names
 NAMES := $(notdir $(basename $(wildcard $(SRCDIR)/*.$(SRCEXT))))
-OBJECTS :=$(patsubst %,$(LIBDIR)/%.o,$(NAMES))
-
+OBJECTS := $(patsubst %,$(LIBDIR)/%.o,$(NAMES))
 
 #
 # COMPILATION RULES
@@ -114,11 +104,14 @@ help:
 	@echo
 
 # Rule for link and generate the binary file
-all: $(OBJECTS)
-	@echo -en "$(BROWN)LD $(END_COLOR)";
-	$(CC) -o $(BINDIR)/$(BINARY) $+ $(DEBUG) $(CFLAGS) $(LIBS)
-	@echo -en "\n--\nBinary file placed at" \
-			  "$(BROWN)$(BINDIR)/$(BINARY)$(END_COLOR)\n";
+all: $(BINDIR)/$(BINARY)
+
+# Link and generate the binary file
+$(BINDIR)/$(BINARY): $(OBJECTS)
+	@echo -en "$(BROWN)LD $(END_COLOR)"
+	@mkdir -p $(BINDIR)
+	$(CC) -o $@ $^ $(DEBUG) $(CFLAGS) $(LIBS)
+	@echo -en "\n--\nBinary file placed at $(BROWN)$@$(END_COLOR)\n"
 
 # Run command
 run:
@@ -126,30 +119,10 @@ run:
 
 # Rule for object binaries compilation
 $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@echo -en "$(BROWN)CC $(END_COLOR)";
+	@echo -en "$(BROWN)CC $(END_COLOR)"
+	@mkdir -p $(LIBDIR)
 	$(CC) -c $^ -o $@ $(DEBUG) $(CFLAGS) $(LIBS)
-
-
-# Rule for run valgrind tool
-#valgrind:
-#	valgrind \
-#		--track-origins=yes \
-#		--leak-check=full \
-#		--leak-resolution=high \
-#		--log-file=$(LOGDIR)/$@.log \
-#		$(BINDIR)/$(BINARY)
-#	@echo -en "\nCheck the log file: $(LOGDIR)/$@.log\n"
-
-
-# Compile tests and run the test binary
-tests:
-	@echo -en "$(BROWN)CC $(END_COLOR)";
-	$(CC) $(TESTDIR)/main.c -o $(BINDIR)/$(TEST_BINARY) $(DEBUG) $(CFLAGS) $(LIBS) $(TEST_LIBS)
-	@which ldconfig && ldconfig -C /tmp/ld.so.cache || true # caching the library linking
-	@echo -en "$(BROWN) Running tests: $(END_COLOR)";
-	./$(BINDIR)/$(TEST_BINARY)
-
 
 # Rule for cleaning the project
 clean:
-	@rm -rvf $(BINDIR)/* $(LIBDIR)/* *.txt; #$(LOGDIR)/*
+	@rm -rvf $(BINDIR)/* $(LIBDIR)/* *.txt #$(LOGDIR)/*
