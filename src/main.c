@@ -1,23 +1,10 @@
 #include "../src/smslib.h"
 #include <curses.h>
-#include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
+
 #define sleep_time 1
-// region: --- Lib functions
 
-void title();
-void mainmenu();
-void printChar(char ch, int n);
-int printFileContent(const char *filename);
-int checkIfFileExists(const char *filename);
-void password();
-void add();
-void show();
-
-// endregion: --- Lib functions
 
 int main() {
 

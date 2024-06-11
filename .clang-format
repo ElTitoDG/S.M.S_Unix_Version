@@ -1,0 +1,9 @@
+BasedOnStyle: llvm
+IndentWidth: 4
+TabWidth: 4
+ColumnLimit: 0
+PenaltyBreakString: 1000
+AllowShortFunctionsOnASingleLine: None
+KeepEmptyLinesAtTheStartOfBlocks: false
+BreakBeforeBraces: Allman
+BinPackParameters: true

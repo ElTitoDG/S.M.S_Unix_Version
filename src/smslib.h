@@ -1,5 +1,5 @@
-#ifdef __SMSLIB_H__
-#define __SMSLIB_H_
+#ifndef __SMSLIB_H__
+#define __SMSLIB_H__
 
 void printChar(char ch, int n);
 
