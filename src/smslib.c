@@ -120,9 +120,9 @@ void add()
 
 void show()
 {
-    if (checkIfFileExists("db.txt") == 0)
+    if (checkIfFileExists("../db.txt") == 0)
         printf("File doen't exist\n");
     else
-        printFileContent("db.txt");
+        printFileContent("../db.txt");
 }
 // endregion: --- Lib functions
