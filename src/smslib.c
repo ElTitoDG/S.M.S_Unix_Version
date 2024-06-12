@@ -81,6 +81,9 @@ void password()
 
 void add()
 {
+    Student s;
+
+
 }
 
 void show()

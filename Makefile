@@ -17,13 +17,13 @@ include project.conf
 # Validating project variables defined in project.conf
 #
 ifndef PROJECT_NAME
-$(error Missing PROJECT_NAME. Put variables at project.conf file)
+	$(error Missing PROJECT_NAME. Put variables at project.conf file)
 endif
 ifndef BINARY
-$(error Missing BINARY. Put variables at project.conf file)
+	$(error Missing BINARY. Put variables at project.conf file)
 endif
 ifndef PROJECT_PATH
-$(error Missing PROJECT_PATH. Put variables at project.conf file)
+	$(error Missing PROJECT_PATH. Put variables at project.conf file)
 endif
 
 # Gets the Operating system name
@@ -98,7 +98,6 @@ help:
 	@echo "Target rules:"
 	@echo "    all      - Compiles and generates binary file"
 	@echo "    run      - Run the current binary file"
-	@echo "    tests    - Compiles with cmocka and run tests binary file"
 	@echo "    clean    - Clean the project by removing binaries"
 	@echo "    help     - Prints a help message with target rules"
 	@echo
