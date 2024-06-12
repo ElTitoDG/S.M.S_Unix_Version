@@ -1,5 +1,7 @@
 #include "../include/smslib.h"
 #include "../include/misclib.h"
+#include <stdio.h>
+#include <string.h>
 
 // region: --- Terminal Colors
 
@@ -81,9 +83,39 @@ void password()
 
 void add()
 {
+    title();
+
+    char c;
     Student s;
 
+    // Solicitar al usuario que ingrese el nombre y el departamento
+    printf("Ingrese el nombre del estudiante: ");
+    fgets(s.name, sizeof(s.name), stdin);
 
+    printf("Ingrese el departamento del estudiante: ");
+    fgets(s.dept, sizeof(s.dept), stdin);
+
+    // Eliminar el carácter de nueva línea de los valores ingresados
+    s.name[strcspn(s.name, "\n")] = 0;
+    s.dept[strcspn(s.dept, "\n")] = 0;
+
+    // Abrir el archivo en modo escritura
+    FILE *fp = fopen("students.txt", "a");
+
+    // Verificar si el archivo se abrió correctamente
+    if (fp == NULL)
+    {
+        printf("No se pudo abrir el archivo.\n");
+        return;
+    }
+
+    // Escribir la estructura en el archivo
+    fprintf(fp, "Name: %s\nDepartment: %s\n", s.name, s.dept);
+
+    // Cerrar el archivo
+    fclose(fp);
+
+    printf("Se ha escrito la información en el archivo.\n");
 }
 
 void show()

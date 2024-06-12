@@ -2,6 +2,7 @@
 #include "../include/smslib.h"
 
 
+
 FILE *fptr;
 
 void printChar(char ch, int n)
@@ -15,16 +16,7 @@ void printChar(char ch, int n)
 int checkIfFileExists(const char *filename)
 {
     struct stat buffer;
-    int exist = stat(filename, &buffer);
-    if (exist == 0)
-    {
-        return EXIT_FAILURE;
-    }
-    else
-    {
-        printf("File doesn't exists\n");
-        return EXIT_SUCCESS;
-    }
+    return stat(filename, &buffer);
 }
 
 void printFileContent(const char *filename)

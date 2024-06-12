@@ -1,5 +1,5 @@
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 struct Stud
 {
@@ -23,10 +23,10 @@ int main()
     FILE *fp = fopen("students.txt", "a");
 
     if (fp == NULL)
-        {
-            perror("No se pudo abrir el archivo\n");
-            return 1;
-        }
+    {
+        perror("No se pudo abrir el archivo\n");
+        return 1;
+    }
 
     fprintf(fp, "%s|%s\n", student.name, student.dept);
 
