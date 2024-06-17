@@ -9,12 +9,12 @@
 #include <unistd.h>
 #include <curses.h>
 
-struct Pass
+struct TPassword
 {
     char pass[25];
 };
 
-struct Stud
+struct TStudent
 {
     char name[50];
     char dept[50];

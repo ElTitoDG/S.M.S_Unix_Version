@@ -20,8 +20,6 @@ FILE *fptr;
 
 // region: --- Structures
 
-#define Student struct Stud
-#define Pass struct Pass
 
 // endregion: --- Structures
 
@@ -58,18 +56,18 @@ void mainmenu()
 void password()
 {
     char c;
-    Pass pa;
+    struct TPassword newPassword;
 
     printf("\nEnter new password: ");
     fflush(stdin);
-    fgets(pa.pass, sizeof(pa.pass), stdin);
+    fgets(newPassword.pass, sizeof(newPassword.pass), stdin);
     printf("\nSave Password (y/n): ");
     fflush(stdin);
     scanf("%c", &c);
     if (c == 'y' || c == 'Y')
     {
         fptr = fopen("password.txt", "w+");
-        fwrite(&pa, sizeof(pa), 1, fptr);
+        fwrite(&newPassword, sizeof(newPassword), 1, fptr);
         fclose(fptr);
         printf("\n\tPassword Saved\n");
     }
@@ -85,37 +83,28 @@ void add()
 {
     title();
 
-    char c;
-    Student s;
+    struct TStudent newStudent;
 
     // Solicitar al usuario que ingrese el nombre y el departamento
     printf("Ingrese el nombre del estudiante: ");
-    fgets(s.name, sizeof(s.name), stdin);
+    scanf("%s", newStudent.name);
 
-    printf("Ingrese el departamento del estudiante: ");
-    fgets(s.dept, sizeof(s.dept), stdin);
+    printf("Ingrese la carrera: ");
+    scanf("%s", newStudent.dept);
 
-    // Eliminar el carácter de nueva línea de los valores ingresados
-    s.name[strcspn(s.name, "\n")] = 0;
-    s.dept[strcspn(s.dept, "\n")] = 0;
+    printf("Datos: %s|%s", newStudent.name, newStudent.dept);
 
-    // Abrir el archivo en modo escritura
-    FILE *fp = fopen("students.txt", "a");
-
-    // Verificar si el archivo se abrió correctamente
-    if (fp == NULL)
+    FILE *fichero = fopen("db.txt", "a+");
+    if (fichero == NULL)
     {
-        printf("No se pudo abrir el archivo.\n");
+        printf("No se puede abrir el archivo \n");
         return;
     }
 
-    // Escribir la estructura en el archivo
-    fprintf(fp, "Name: %s\nDepartment: %s\n", s.name, s.dept);
+    fprintf(fichero, "%s|%s\n", newStudent.name, newStudent.dept);
+    fclose(fichero);
 
-    // Cerrar el archivo
-    fclose(fp);
-
-    printf("Se ha escrito la información en el archivo.\n");
+    return;
 }
 
 void show()
