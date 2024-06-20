@@ -34,37 +34,45 @@ int main()
         {
         case '1':
             add();
+
             sleep(sleep_time);
             printf("\t\tPress any key to continue");
             getchar();
             break;
         case '2':
             modStudent();
+
             sleep(sleep_time);
             printf("\t\tPress any key to continue");
             getchar();
             break;
         case '3':
-            show();
+            show("db.txt");
+
+            sleep(sleep_time);
+            printf("\t\tPress any key to continue");
+            getchar();
+            break;
+        case '5':
+            deleteStudent();
+
             sleep(sleep_time);
             printf("\t\tPress any key to continue");
             getchar();
             break;
         case '6':
             password();
+
             sleep(sleep_time);
             printf("\t\tPress any key to continue");
             getchar();
             break;
         case '7':
             if (checkIfFileExists("test/a.txt"))
-            {
                 printFileContent("test/a.txt");
-            }
             else
-            {
                 printf("not exits");
-            }
+
             sleep(sleep_time);
             printf("\t\tPress any key to continue");
             getchar();

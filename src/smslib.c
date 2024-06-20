@@ -1,26 +1,11 @@
 #include "../include/smslib.h"
 #include "../include/misclib.h"
 
-// region: --- Terminal Colors
-
-#define KNRM "\x1B[0m"
-#define KRED "\x1B[31m"
-#define KGRN "\x1B[32m"
-#define KYEL "\x1B[33m"
-#define KBLU "\x1B[34m"
-#define KMAG "\x1B[35m"
-#define KCYN "\x1B[36m"
-#define KWHT "\x1B[37m"
-
-// endregion: --- Terminal Colors
-
-// region: --- Structures
-
-
-// endregion: --- Structures
-
 // region: --- Lib functions
 
+/*
+    Función: imprime el titulo de la app
+*/
 void title()
 {
     system("clear");
@@ -31,6 +16,9 @@ void title()
     printf(KNRM "\n");
 }
 
+/*
+    Función: imprime el menu principal
+*/
 void mainmenu()
 {
     printf("\n\t");
@@ -40,7 +28,7 @@ void mainmenu()
     printf("\n\n\t\t\t\t2. Modify Student");
     printf("\n\n\t\t\t\t3. Show all Students");
     printf("\n\n\t\t\t\t4. Individual View(WIP)");
-    printf("\n\n\t\t\t\t5. Remove Student(WIP)");
+    printf("\n\n\t\t\t\t5. Remove Student");
     printf("\n\n\t\t\t\t6. Change Password");
     printf("\n\n\t\t\t\t7. Info");
     printf("\n\n\t\t\t\tq. Logout\n\n\t");
@@ -49,6 +37,9 @@ void mainmenu()
     printf("\n\n\t\t\t\tEnter your option: ");
 }
 
+/*
+    Función: gestiona la creacion y modificacion de la contraseña
+*/
 void password()
 {
     char c;
@@ -74,6 +65,9 @@ void password()
     }
 }
 
+/*
+    Función: añade un nuevo estudiante a la base de datos/archivo
+*/
 void add()
 {
     title();
@@ -82,6 +76,7 @@ void add()
     newStudent.id = 100;
     fflush(stdin);
 
+    // Abre el archivo para buscar el id y asignarlo
     FILE *fichero = fopen("db.txt", "r");
     if (fichero != NULL)
     {
@@ -97,6 +92,7 @@ void add()
     }
     newStudent.id++;
 
+    // Coje el nombre del estudiante
     printf("Ingrese el nombre del estudiante: ");
     if (fgets(newStudent.name, sizeof(newStudent.name), stdin) != NULL)
     {
@@ -105,6 +101,7 @@ void add()
             newStudent.name[len - 1] = '\0';
     }
 
+    // Coje la carrera del estudiante
     printf("Ingrese la carrera del estudiante: ");
     if (fgets(newStudent.dept, sizeof(newStudent.dept), stdin) != NULL)
     {
@@ -128,6 +125,9 @@ void add()
     return;
 }
 
+/*
+    Función: abre un archivo y lo imprime linea a linea
+*/
 void modStudent()
 {
     title();
@@ -188,11 +188,56 @@ void modStudent()
         printf("Estudiante con ID <%d> actualizado correctamente.\n", studentID);
 }
 
-void show()
+/*
+    Función: funcion que borra un estudiante segun su id
+             Creamos un archivo temporal para copiar todos menos el pedido
+*/
+void deleteStudent()
 {
-    if (checkIfFileExists("db.txt") == false)
-        printf("File doen't exist\n");
-    else
-        printFileContent("db.txt");
+    FILE *fichero = fopen("db.txt", "r");
+    if (fichero == NULL)
+    {
+        perror("\nNo se puede abrir el archivo\n");
+        return;
+    }
+
+    FILE *temp = fopen("temp.txt", "w");
+    if (temp == NULL)
+    {
+        perror("\nNo se puede crear el archivo temporal\n");
+        fclose(fichero);
+        return;
+    }
+
+    char line[256];
+    struct TStudent delStudent;
+    int found = 0, studentID;
+
+    manageInput("Introduzca el ID del estudiante a eliminar: ", "%d", &studentID);
+
+    while (fgets(line, sizeof(line), fichero) != NULL)
+    {
+        sscanf(line, "%d. %[^|]|%[^\n]", &delStudent.id, delStudent.name, delStudent.dept);
+
+        if (delStudent.id == studentID)
+            found = -1;
+        else
+            fprintf(temp, "%s", line);
+    }
+
+    fclose(fichero);
+    fclose(temp);
+
+    if (!found)
+    {
+        printf("Estudiante con ID <%d> no encontrado.\n", studentID);
+        remove("temp.txt");
+    } else
+    {
+        remove("db.txt");
+        rename("temp.txt", "db.txt");
+        printf("Estudiante con ID <%d> eliminado correctamente.\n", studentID);
+    }
+
 }
 // endregion: --- Lib functions
