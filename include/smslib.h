@@ -26,6 +26,7 @@ void title();
 void mainmenu();
 void password();
 void add();
+void modStudent();
 void show();
 
 #endif // __SMSLIB_H__

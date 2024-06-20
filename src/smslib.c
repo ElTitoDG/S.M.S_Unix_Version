@@ -1,7 +1,5 @@
 #include "../include/smslib.h"
 #include "../include/misclib.h"
-#include <stdio.h>
-#include <sys/_types/_null.h>
 
 // region: --- Terminal Colors
 
@@ -15,8 +13,6 @@
 #define KWHT "\x1B[37m"
 
 // endregion: --- Terminal Colors
-
-FILE *fptr;
 
 // region: --- Structures
 
@@ -40,9 +36,9 @@ void mainmenu()
     printf("\n\t");
     printChar('*', 65);
 
-    printf("\n\n\t\t\t\t1. Add Student(WIP)");
-    printf("\n\n\t\t\t\t2. Modify Student(WIP)");
-    printf("\n\n\t\t\t\t3. Show all Students(WIP)");
+    printf("\n\n\t\t\t\t1. Add Student");
+    printf("\n\n\t\t\t\t2. Modify Student");
+    printf("\n\n\t\t\t\t3. Show all Students");
     printf("\n\n\t\t\t\t4. Individual View(WIP)");
     printf("\n\n\t\t\t\t5. Remove Student(WIP)");
     printf("\n\n\t\t\t\t6. Change Password");
@@ -58,17 +54,16 @@ void password()
     char c;
     struct TPassword newPassword;
 
-    printf("\nEnter new password: ");
     fflush(stdin);
-    fgets(newPassword.pass, sizeof(newPassword.pass), stdin);
-    printf("\nSave Password (y/n): ");
+    manageInput("\nEnter new password: ", "%s", &newPassword.pass);
+
     fflush(stdin);
-    scanf("%c", &c);
+    manageInput("\nSave Password (y/n): ", "%c", &c);
     if (c == 'y' || c == 'Y')
     {
-        fptr = fopen("password.txt", "w+");
-        fwrite(&newPassword, sizeof(newPassword), 1, fptr);
-        fclose(fptr);
+        FILE *fichero = fopen("password.txt", "w");
+        fprintf(fichero, "%s", newPassword.pass);
+        fclose(fichero);
         printf("\n\tPassword Saved\n");
     }
     else
@@ -131,6 +126,66 @@ void add()
     fclose(fichero);
 
     return;
+}
+
+void modStudent()
+{
+    title();
+
+    FILE * fichero = fopen("db.txt", "r+");
+    if (fichero == NULL)
+    {
+        perror("\nNo se puede abrir el archivo\n");
+        return;
+    }
+
+    char line[256];
+    struct TStudent mStudent;
+    int found = 0, studentID;
+    long int pos;
+
+    manageInput("Introduzca el ID del estudiante a modificar: ", "%d", &studentID);
+
+    while (fgets(line, sizeof(line), fichero) != NULL)
+    {
+        pos = ftell(fichero);
+        sscanf(line, "%d. %[^|]|%[^\n]", &mStudent.id, mStudent.name, mStudent.dept);
+
+        if (mStudent.id == studentID)
+        {
+            found = 1;
+
+            printf("Ingrese el nuevo nombre: ");
+            if (fgets(mStudent.name, sizeof(mStudent.name), stdin) != NULL)
+            {
+                size_t len = strlen(mStudent.name);
+                if (len > 0 && mStudent.name[len - 1] == '\n')
+                    mStudent.name[len - 1] = '\0';
+            }
+
+            printf("Ingrese la nueva carrera: ");
+            if (fgets(mStudent.dept, sizeof(mStudent.dept), stdin) != NULL)
+            {
+                size_t len = strlen(mStudent.dept);
+                if (len > 0 && mStudent.dept[len - 1] == '\n')
+                    mStudent.dept[len - 1] = '\0';
+            }
+
+            printf("Datos: %d. %s|%s\n", mStudent.id, mStudent.name, mStudent.dept);
+
+            fseek(fichero, pos - strlen(line), SEEK_SET);
+            fprintf(fichero, "%d. %s|%s", mStudent.id, mStudent.name, mStudent.dept);
+            break;
+        }
+    }
+
+    fprintf(fichero, "\n");
+    fclose(fichero);
+
+    if (!found)
+        printf("Estudiante con ID <%d> no encontrado.\n", studentID);
+    else
+        printf("Estudiante con ID <%d> actualizado correctamente.\n", studentID);
 }
 
 void show()

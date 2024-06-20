@@ -39,9 +39,7 @@ END_COLOR=\$(COLOR_PREFIX)[0m
 # Source code directory structure
 BINDIR := bin
 SRCDIR := src
-LOGDIR := log
 LIBDIR := lib
-TESTDIR := test
 
 # Source code file extension
 SRCEXT := c
@@ -50,7 +48,7 @@ SRCEXT := c
 CC := clang
 
 # Defines the language standards for GCC
-STD := -std=c17 # See man gcc for more options
+STD := -std=c17 #See man gcc for more options
 
 # Protection for stack-smashing attack
 STACK := -fstack-protector-all -Wstack-protector
@@ -108,4 +106,4 @@ $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 # Rule for cleaning the project
 clean:
-	@rm -rvf $(BINDIR)/* $(LIBDIR)/* *.txt #$(LOGDIR)/*
+	@rm -rvf $(BINDIR)/* $(LIBDIR)/*

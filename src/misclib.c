@@ -34,7 +34,14 @@ void printFileContent(const char *filename)
     }
 
     while (fgets(buffer, sizeof(buffer), fptr) != NULL)
-        printf("%s", buffer);
+        printf("%s", buffer); // Reads line by line
 
     fclose(fptr);
+}
+
+void manageInput(const char *prompt, const char *format, void *data)
+{
+    printf("%s", prompt);
+    scanf(format, data);
+    while (getchar() != '\n');
 }

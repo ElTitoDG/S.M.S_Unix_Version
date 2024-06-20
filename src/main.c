@@ -35,6 +35,13 @@ int main()
         case '1':
             add();
             sleep(sleep_time);
+            printf("\t\tPress any key to continue");
+            getchar();
+            break;
+        case '2':
+            modStudent();
+            sleep(sleep_time);
+            printf("\t\tPress any key to continue");
             getchar();
             break;
         case '3':
@@ -59,11 +66,11 @@ int main()
                 printf("not exits");
             }
             sleep(sleep_time);
-            printf("\n\t\tPress any key to continue\n\n\n");
+            printf("\t\tPress any key to continue");
             getchar();
             break;
         case 'q':
-            return 1;
+            return EXIT_SUCCESS;
             break;
         default:
             printf("\n\t\tNo action selected");
@@ -72,5 +79,5 @@ int main()
             getchar();
         }
     }
-    return 1;
+    return EXIT_FAILURE;
 }
