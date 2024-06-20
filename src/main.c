@@ -7,7 +7,7 @@ int main()
 {
     // region: --- Main func variables
 
-    int option;
+    char option;
 
     // endregion: --- Main func variables
 
@@ -18,7 +18,7 @@ int main()
     printf("\n\n\t\t\t\t Julián Hinojosa Gil");
     printf("\n\n\t\t\t\t San Agustin Institute\n\t\t\t");
     printChar('=', 39);
-    printf("\n\n\n\t\t\t press any key to enter");
+    printf("\n\n\t\t\t\tpress any key to enter");
     getchar();
 
     // endregion: --- Main Title TUI
@@ -28,29 +28,28 @@ int main()
         title();
         mainmenu();
 
-        scanf("%d", &option);
+        scanf(" %c", &option);
 
         switch (option)
         {
-        case 1:
+        case '1':
             add();
             sleep(sleep_time);
             getchar();
             break;
-        case 3:
-            printf("Function Here\n");
+        case '3':
             show();
             sleep(sleep_time);
-            printf("\n\t\tPress any key to continue\n\n\t");
+            printf("\t\tPress any key to continue");
             getchar();
             break;
-        case 6:
+        case '6':
             password();
             sleep(sleep_time);
-            printf("\n\t\tPress any key to continue\n\n\n");
+            printf("\t\tPress any key to continue");
             getchar();
             break;
-        case 7:
+        case '7':
             if (checkIfFileExists("test/a.txt"))
             {
                 printFileContent("test/a.txt");
@@ -63,7 +62,7 @@ int main()
             printf("\n\t\tPress any key to continue\n\n\n");
             getchar();
             break;
-        case 8:
+        case 'q':
             return 1;
             break;
         default:

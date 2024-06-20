@@ -2,9 +2,10 @@
 #define __MISCLIB_H__
 
 #include <stdio.h>
+#include "../include/smslib.h"
 
 void printChar(char ch, int n);
-int checkIfFileExists(const char *filename);
+bool checkIfFileExists(const char *filename);
 void printFileContent(const char *filename);
 
 #endif // __MISCLIB_H__

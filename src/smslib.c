@@ -1,7 +1,7 @@
 #include "../include/smslib.h"
 #include "../include/misclib.h"
 #include <stdio.h>
-#include <string.h>
+#include <sys/_types/_null.h>
 
 // region: --- Terminal Colors
 
@@ -47,7 +47,7 @@ void mainmenu()
     printf("\n\n\t\t\t\t5. Remove Student(WIP)");
     printf("\n\n\t\t\t\t6. Change Password");
     printf("\n\n\t\t\t\t7. Info");
-    printf("\n\n\t\t\t\t8. Logout\n\n\t");
+    printf("\n\n\t\t\t\tq. Logout\n\n\t");
     printChar('*', 65);
 
     printf("\n\n\t\t\t\tEnter your option: ");
@@ -84,24 +84,50 @@ void add()
     title();
 
     struct TStudent newStudent;
+    newStudent.id = 100;
+    fflush(stdin);
 
-    // Solicitar al usuario que ingrese el nombre y el departamento
+    FILE *fichero = fopen("db.txt", "r");
+    if (fichero != NULL)
+    {
+        char line[256];
+        while (fgets(line, sizeof(line), fichero))
+        {
+            int current_id;
+            sscanf(line, "%d.", &current_id);
+            if (current_id > newStudent.id)
+                newStudent.id = current_id;
+        }
+        fclose(fichero);
+    }
+    newStudent.id++;
+
     printf("Ingrese el nombre del estudiante: ");
-    scanf("%s", newStudent.name);
+    if (fgets(newStudent.name, sizeof(newStudent.name), stdin) != NULL)
+    {
+        size_t len = strlen(newStudent.name);
+        if (len > 0 && newStudent.name[len - 1] == '\n')
+            newStudent.name[len - 1] = '\0';
+    }
 
-    printf("Ingrese la carrera: ");
-    scanf("%s", newStudent.dept);
+    printf("Ingrese la carrera del estudiante: ");
+    if (fgets(newStudent.dept, sizeof(newStudent.dept), stdin) != NULL)
+    {
+        size_t len = strlen(newStudent.dept);
+        if (len > 0 && newStudent.dept[len - 1] == '\n')
+            newStudent.dept[len - 1] = '\0';
+    }
 
-    printf("Datos: %s|%s", newStudent.name, newStudent.dept);
+    printf("Datos: %d. %s|%s\n", newStudent.id, newStudent.name, newStudent.dept);
 
-    FILE *fichero = fopen("db.txt", "a+");
+    fichero = fopen("db.txt", "a+");
     if (fichero == NULL)
     {
         printf("No se puede abrir el archivo \n");
         return;
     }
 
-    fprintf(fichero, "%s|%s\n", newStudent.name, newStudent.dept);
+    fprintf(fichero, "%d. %s|%s\n", newStudent.id, newStudent.name, newStudent.dept);
     fclose(fichero);
 
     return;
@@ -109,9 +135,9 @@ void add()
 
 void show()
 {
-    if (checkIfFileExists("../db.txt") == 0)
+    if (checkIfFileExists("db.txt") == false)
         printf("File doen't exist\n");
     else
-        printFileContent("../db.txt");
+        printFileContent("db.txt");
 }
 // endregion: --- Lib functions

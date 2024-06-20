@@ -16,8 +16,9 @@ struct TPassword
 
 struct TStudent
 {
-    char name[50];
-    char dept[50];
+    int id;
+    char name[100];
+    char dept[100];
 };
 
 void printChar(char ch, int n);

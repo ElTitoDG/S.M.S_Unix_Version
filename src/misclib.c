@@ -1,9 +1,4 @@
 #include "../include/misclib.h"
-#include "../include/smslib.h"
-
-
-
-FILE *fptr;
 
 void printChar(char ch, int n)
 {
@@ -13,33 +8,33 @@ void printChar(char ch, int n)
     }
 }
 
-int checkIfFileExists(const char *filename)
+bool checkIfFileExists(const char *filename)
 {
-    struct stat buffer;
-    return stat(filename, &buffer);
+    FILE *fp = fopen(filename, "r");
+    bool exits = false;
+    if (fp != NULL)
+    {
+        exits = true;
+        fclose(fp);
+    }
+    return exits;
 }
 
 void printFileContent(const char *filename)
 {
+    fflush(stdin);
     FILE *fptr;
-    char c;
+    char buffer[256];
 
-    // Open file
     fptr = fopen(filename, "r");
     if (fptr == NULL)
     {
-        perror("\nCannot open the file \n");
-        printf("\n");
+        perror("\nNo se puede abrir el archivo\n");
         return;
     }
 
-    // Read content of the file and print it
-
-    while ((c = fgetc(fptr)) != EOF)
-    {
-        putchar(c);
-    }
-    putchar('\n');
+    while (fgets(buffer, sizeof(buffer), fptr) != NULL)
+        printf("%s", buffer);
 
     fclose(fptr);
 }
