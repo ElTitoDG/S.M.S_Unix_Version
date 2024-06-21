@@ -34,7 +34,7 @@ void mainmenu()
     printf("\n\n\t\t\t\tq. Logout\n\n\t");
     printChar('*', 65);
 
-    printf("\n\n\t\t\t\tEnter your option: ");
+    printf("\n\n\t\t\t\tSelecciona una opción: ");
 }
 
 /*
@@ -46,21 +46,21 @@ void password()
     struct TPassword newPassword;
 
     fflush(stdin);
-    manageInput("\nEnter new password: ", "%s", &newPassword.pass);
+    manageInput("\nNueva contraseña: ", "%s", newPassword.pass);
 
     fflush(stdin);
-    manageInput("\nSave Password (y/n): ", "%c", &c);
+    manageInput("\nGuardar contraseña (s/n): ", "%c", &c);
     if (c == 'y' || c == 'Y')
     {
         FILE *fichero = fopen("password.txt", "w");
         fprintf(fichero, "%s", newPassword.pass);
         fclose(fichero);
-        printf("\n\tPassword Saved\n");
+        printf("\n\tContraseña guardada\n");
     }
     else
     {
-        printf("Password not saved: \n");
-        printf("Press any key to continue:");
+        printf("Contraseña no guardada: \n");
+        printf("Presione cualquier tecla para continuar:");
         getchar();
     }
 }

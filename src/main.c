@@ -16,9 +16,9 @@ int main()
     title();
     printf("\n\n\t\t\t\t2022-2023 Academic Year");
     printf("\n\n\t\t\t\t Julián Hinojosa Gil");
-    printf("\n\n\t\t\t\t San Agustin Institute\n\t\t\t");
+    printf("\n\n\t\t\t\t Universidad de Alicante\n\t\t\t");
     printChar('=', 39);
-    printf("\n\n\t\t\t\tpress any key to enter");
+    printf("\n\n\t\t\tPulsa cualquier tecla para continuar");
     getchar();
 
     // endregion: --- Main Title TUI
@@ -36,35 +36,35 @@ int main()
             add();
 
             sleep(sleep_time);
-            printf("\t\tPress any key to continue");
+            printf("\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '2':
             modStudent();
 
             sleep(sleep_time);
-            printf("\t\tPress any key to continue");
+            printf("\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '3':
             show("db.txt");
 
             sleep(sleep_time);
-            printf("\t\tPress any key to continue");
+            printf("\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '5':
             deleteStudent();
 
             sleep(sleep_time);
-            printf("\t\tPress any key to continue");
+            printf("\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '6':
             password();
 
             sleep(sleep_time);
-            printf("\t\tPress any key to continue");
+            printf("\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '7':
@@ -74,15 +74,15 @@ int main()
                 printf("not exits");
 
             sleep(sleep_time);
-            printf("\t\tPress any key to continue");
+            printf("\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case 'q':
             return EXIT_SUCCESS;
             break;
         default:
-            printf("\n\t\tNo action selected");
-            printf("\n\t\tPress any key to continue\n\n\n");
+            printf("\n\t\tNinguna opcion seleccionada");
+            printf("\n\t\tPresione cualquier tecla para continuar\n\n\n");
             sleep(sleep_time);
             getchar();
         }

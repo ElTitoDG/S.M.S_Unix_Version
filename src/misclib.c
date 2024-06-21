@@ -72,7 +72,7 @@ void manageInput(const char *prompt, const char *format, void *data)
 void show(const char *filename)
 {
     if (checkIfFileExists(filename) == false)
-        printf("File doen't exist\n");
+        printf("El archivo no existe\n");
     else
         printFileContent(filename);
 }
