@@ -6,7 +6,7 @@ I created this project with two objectives in mind:
 - Practice C language project 
 - Create a version that uses Unix C libraries instead of Windows ones 
 
-Also this project uses [C Project Template](https://github.com/pantuza/c-project-template) to generate the project structure and make file
+Also, this project uses [C Project Template](https://github.com/pantuza/c-project-template) to generate the project structure and make file
 
 
 ## SMSLIB.C wiki
@@ -39,7 +39,7 @@ The program includes several library functions that facilitate different functio
 
 - `printChar(char ch, int n)` - This function prints a specified character `ch` a certain number of times, as determined by the integer value `n`.
 - `title()` - The `title` function clears the terminal screen and displays a stylized title for the Student Management System.
-- `mainmenu()` - This function displays the main menu options for users to interact with the program.
+- `mainMenu()` - This function displays the main menu options for users to interact with the program.
 - `checkIfFileExists(const char *filename)` - This function checks the existence of a specified file in the current directory.
 - `printFileContent(const char *filename)` - This function reads the content of a file and prints it to the console.
 - `password()` - The `password` function allows users to set a new password for the Student Management System. It prompts the user for input and saves the password in a file named `password.txt`.
@@ -56,7 +56,7 @@ For a more comprehensive understanding, refer to the source code provided in the
 
 ## Warnings
 
-To compile this project with no problems you will need to create two folders inside of the project:
+To compile this project with no problems you will need to create two folders inside the project:
 
 `mkdir bin`
 `mkdir lib`

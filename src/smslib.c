@@ -19,7 +19,7 @@ void title()
 /*
     Función: imprime el menu principal
 */
-void mainmenu()
+void mainMenu()
 {
     printf("\n\t");
     printChar('*', 65);
@@ -27,7 +27,7 @@ void mainmenu()
     printf("\n\n\t\t\t\t1. Add Student");
     printf("\n\n\t\t\t\t2. Modify Student");
     printf("\n\n\t\t\t\t3. Show all Students");
-    printf("\n\n\t\t\t\t4. Individual View(WIP)");
+    printf("\n\n\t\t\t\t4. Individual View");
     printf("\n\n\t\t\t\t5. Remove Student");
     printf("\n\n\t\t\t\t6. Change Password");
     printf("\n\n\t\t\t\t7. Info");
@@ -127,7 +127,7 @@ void add()
 }
 
 /*
-    Función: abre un archivo y lo imprime linea a linea
+    Función: abre un archivo y lo imprime línea a línea
 */
 void modStudent()
 {

@@ -36,7 +36,7 @@ struct TStudent
 
 void printChar(char ch, int n);
 void title();
-void mainmenu();
+void mainMenu();
 void password();
 void add();
 void modStudent();

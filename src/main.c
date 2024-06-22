@@ -26,7 +26,7 @@ int main()
     while (1)
     {
         title();
-        mainmenu();
+        mainMenu();
 
         scanf(" %c", &option);
 
@@ -81,7 +81,7 @@ int main()
                 printf("not exits");
 
             sleep(sleep_time);
-            printf("\t\tPresione cualquier tecla para continuar");
+            printf("\n\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case 'q':
