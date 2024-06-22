@@ -18,17 +18,18 @@ ifndef PROJECT_PATH
 	$(error Missing PROJECT_PATH. Put variables at project.conf file)
 endif
 
-# Default shell
-SHELL := zsh
-
 # Gets the Operating system name
 OS := $(shell uname -s)
 
-# Color prefix for Linux distributions
-COLOR_PREFIX := e
-
+# Default shell and compiler based on the operating system
 ifeq ($(OS),Darwin)
-	COLOR_PREFIX := 033
+    SHELL := zsh
+    CC := clang
+    COLOR_PREFIX := 033
+else
+    SHELL := bash
+    CC := gcc
+    COLOR_PREFIX := e
 endif
 
 # Color definition for print purpose
@@ -43,9 +44,6 @@ LIBDIR := lib
 
 # Source code file extension
 SRCEXT := c
-
-# Defines the C Compiler
-CC := clang
 
 # Defines the language standards for GCC
 STD := -std=c17 #See man gcc for more options
@@ -100,7 +98,7 @@ run:
 
 # Rule for object binaries compilation
 $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@echo -en "$(BROWN)CC $(END_COLOR)"
+	@echo -en "$(BROWN)$(CC) $(END_COLOR)"
 	@mkdir -p $(LIBDIR)
 	$(CC) -c $^ -o $@ $(DEBUG) $(CFLAGS) $(LIBS)
 

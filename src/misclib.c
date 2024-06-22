@@ -62,7 +62,11 @@ void printFileContent(const char *filename)
 void manageInput(const char *prompt, const char *format, void *data)
 {
     printf("%s", prompt);
-    scanf(format, data);
+    if (scanf(format, data) != 1)
+    {
+        fprintf(stderr, "Error leyendo el input. Pruebe otra vez.\n");
+        while (getchar() != '\n');
+    }
     while (getchar() != '\n');
 }
 

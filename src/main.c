@@ -28,7 +28,12 @@ int main()
         title();
         mainMenu();
 
-        scanf(" %c", &option);
+        if (scanf(" %c", &option) != 1)
+        {
+            fprintf(stderr, "Error leyendo el input. Pruebe otra vez.\n");
+            while (getchar() != '\n');
+            return EXIT_FAILURE;
+        }
 
         switch (option)
         {
@@ -86,13 +91,11 @@ int main()
             break;
         case 'q':
             return EXIT_SUCCESS;
-            break;
         default:
-            printf("\n\t\tNinguna opcion seleccionada");
+            printf("\n\t\tNinguna opción seleccionada");
             printf("\n\t\tPresione cualquier tecla para continuar\n\n\n");
             sleep(sleep_time);
             getchar();
         }
     }
-    return EXIT_FAILURE;
 }

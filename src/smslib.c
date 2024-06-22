@@ -4,11 +4,13 @@
 // region: --- Lib functions
 
 /*
-    Función: imprime el titulo de la app
+    Función: imprime el título de la app
 */
 void title()
 {
-    system("clear");
+    int ret = system("clear");
+    if (ret != 0)
+        fprintf(stderr, "Error limpiando la consola con el comando 'clear'.\n");
     printf(KCYN "\n\n\t");
     printChar('=', 19);
     printf(" Student Management System ");

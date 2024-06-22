@@ -14,23 +14,8 @@ jobs:
         - name: Checkout repository
           uses: actions/checkout@v2
 
-        - name: List files in current directory for debugging
-          run: ls -la
-
-        - name: Install dependencies
-          run: sudo apt-get install -y autoconf automake libtool
-
-        - name: Make configure script executable
-          run: chmod +x ./configure
-
-        - name: configure
-          run: ./configure
-
-        - name: Install dependencies
+        - name: Check Makefile
           run: make
 
-        - name: Run check
-          run: make check
-
-        - name: Run distcheck
-          run: make distcheck
+        - name: Compiles Binary
+          run: make all
