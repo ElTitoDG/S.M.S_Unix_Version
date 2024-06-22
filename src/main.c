@@ -36,35 +36,42 @@ int main()
             add();
 
             sleep(sleep_time);
-            printf("\t\tPresione cualquier tecla para continuar");
+            printf("\n\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '2':
             modStudent();
 
             sleep(sleep_time);
-            printf("\t\tPresione cualquier tecla para continuar");
+            printf("\n\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '3':
             show("db.txt");
 
             sleep(sleep_time);
-            printf("\t\tPresione cualquier tecla para continuar");
+            printf("\n\t\tPresione cualquier tecla para continuar");
+            getchar();
+            break;
+        case '4':
+            showStudent("db.txt");
+
+            sleep(sleep_time);
+            printf("\n\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '5':
             deleteStudent();
 
             sleep(sleep_time);
-            printf("\t\tPresione cualquier tecla para continuar");
+            printf("\n\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '6':
             password();
 
             sleep(sleep_time);
-            printf("\t\tPresione cualquier tecla para continuar");
+            printf("\n\t\tPresione cualquier tecla para continuar");
             getchar();
             break;
         case '7':

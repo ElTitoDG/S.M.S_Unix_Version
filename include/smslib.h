@@ -41,5 +41,6 @@ void password();
 void add();
 void modStudent();
 void deleteStudent();
+void showStudent(const char *filename);
 
 #endif // __SMSLIB_H__

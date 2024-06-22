@@ -50,7 +50,7 @@ void password()
 
     fflush(stdin);
     manageInput("\nGuardar contraseña (s/n): ", "%c", &c);
-    if (c == 'y' || c == 'Y')
+    if (c == 's' || c == 'S')
     {
         FILE *fichero = fopen("password.txt", "w");
         fprintf(fichero, "%s", newPassword.pass);
@@ -58,10 +58,27 @@ void password()
         printf("\n\tContraseña guardada\n");
     }
     else
-    {
         printf("Contraseña no guardada: \n");
-        printf("Presione cualquier tecla para continuar:");
-        getchar();
+}
+
+void studentInput(struct TStudent *stud)
+{
+    // Coje el nombre del estudiante
+    printf("Ingrese el nombre del estudiante: ");
+    if (fgets(stud->name, sizeof(stud->name), stdin) != NULL)
+    {
+        size_t len = strlen(stud->name);
+        if (len > 0 && stud->name[len - 1] == '\n')
+            stud->name[len - 1] = '\0';
+    }
+
+    // Coje la carrera del estudiante
+    printf("Ingrese la carrera del estudiante: ");
+    if (fgets(stud->dept, sizeof(stud->dept), stdin) != NULL)
+    {
+        size_t len = strlen(stud->dept);
+        if (len > 0 && stud->dept[len - 1] == '\n')
+            stud->dept[len - 1] = '\0';
     }
 }
 
@@ -92,23 +109,7 @@ void add()
     }
     newStudent.id++;
 
-    // Coje el nombre del estudiante
-    printf("Ingrese el nombre del estudiante: ");
-    if (fgets(newStudent.name, sizeof(newStudent.name), stdin) != NULL)
-    {
-        size_t len = strlen(newStudent.name);
-        if (len > 0 && newStudent.name[len - 1] == '\n')
-            newStudent.name[len - 1] = '\0';
-    }
-
-    // Coje la carrera del estudiante
-    printf("Ingrese la carrera del estudiante: ");
-    if (fgets(newStudent.dept, sizeof(newStudent.dept), stdin) != NULL)
-    {
-        size_t len = strlen(newStudent.dept);
-        if (len > 0 && newStudent.dept[len - 1] == '\n')
-            newStudent.dept[len - 1] = '\0';
-    }
+    studentInput(&newStudent);
 
     printf("Datos: %d. %s|%s\n", newStudent.id, newStudent.name, newStudent.dept);
 
@@ -155,21 +156,7 @@ void modStudent()
         {
             found = 1;
 
-            printf("Ingrese el nuevo nombre: ");
-            if (fgets(mStudent.name, sizeof(mStudent.name), stdin) != NULL)
-            {
-                size_t len = strlen(mStudent.name);
-                if (len > 0 && mStudent.name[len - 1] == '\n')
-                    mStudent.name[len - 1] = '\0';
-            }
-
-            printf("Ingrese la nueva carrera: ");
-            if (fgets(mStudent.dept, sizeof(mStudent.dept), stdin) != NULL)
-            {
-                size_t len = strlen(mStudent.dept);
-                if (len > 0 && mStudent.dept[len - 1] == '\n')
-                    mStudent.dept[len - 1] = '\0';
-            }
+            studentInput(&mStudent);
 
             printf("Datos: %d. %s|%s\n", mStudent.id, mStudent.name, mStudent.dept);
 
@@ -238,6 +225,38 @@ void deleteStudent()
         rename("temp.txt", "db.txt");
         printf("Estudiante con ID <%d> eliminado correctamente.\n", studentID);
     }
+}
 
+void showStudent(const char *filename)
+{
+    char line[256];
+    struct TStudent student;
+    int found = 0, studentID;
+
+    FILE *fichero = fopen(filename, "r");
+    if (fichero == NULL)
+    {
+        perror("No se ha podido abrir el archivo\n");
+        return;
+    }
+
+    manageInput("Introduzca el ID del estudiante a mostrar: ", "%d", &studentID);
+    printf("\n");
+
+    while (fgets(line, sizeof(line), fichero) != NULL)
+    {
+        sscanf(line, "%d. %[^|]|%[^\n]", &student.id, student.name, student.dept);
+        if (student.id == studentID)
+        {
+            found = 1;
+            printf("ID: %d\n Nombre: %s\n Carrera: %s\n", student.id, student.name, student.dept);
+            break;
+        }
+    }
+
+    if (!found)
+        printf("Estudiente con ID %d no encontrado.\n", student.id);
+
+    fclose(fichero);
 }
 // endregion: --- Lib functions
