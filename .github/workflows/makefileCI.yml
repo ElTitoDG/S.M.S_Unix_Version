@@ -11,16 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+        - name: Checkout repository
+          uses: actions/checkout@v2
 
-      - name: configure
-        run: ./configure
+        - name: List files in current directory for debugging
+          run: ls -la
 
-      - name: Install dependencies
-        run: make
+        - name: Install dependencies
+          run: sudo apt-get install -y autoconf automake libtool
 
-      - name: Run check
-        run: make check
+        - name: Make configure script executable
+          run: chmod +x ./configure
 
-      - name: Run distcheck
-        run: make distcheck
+        - name: configure
+          run: ./configure
+
+        - name: Install dependencies
+          run: make
+
+        - name: Run check
+          run: make check
+
+        - name: Run distcheck
+          run: make distcheck
