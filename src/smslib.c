@@ -1,10 +1,8 @@
 #include "../include/smslib.h"
 #include "../include/misclib.h"
 
-// region: --- Lib functions
-
 /*
-    Función: imprime el título de la app
+    Function: prints the app title
 */
 void title()
 {
@@ -19,7 +17,7 @@ void title()
 }
 
 /*
-    Función: imprime el menu principal
+    Function: prints the main menu
 */
 void mainMenu()
 {
@@ -40,7 +38,7 @@ void mainMenu()
 }
 
 /*
-    Función: gestiona la creacion y modificacion de la contraseña
+    Function: manages password creation and modification
 */
 void password()
 {
@@ -65,7 +63,7 @@ void password()
 
 void studentInput(struct TStudent *stud)
 {
-    // Coje el nombre del estudiante
+    // Get the student's name
     printf("Ingrese el nombre del estudiante: ");
     if (fgets(stud->name, sizeof(stud->name), stdin) != NULL)
     {
@@ -74,7 +72,7 @@ void studentInput(struct TStudent *stud)
             stud->name[len - 1] = '\0';
     }
 
-    // Coje la carrera del estudiante
+    // Take the student's career
     printf("Ingrese la carrera del estudiante: ");
     if (fgets(stud->dept, sizeof(stud->dept), stdin) != NULL)
     {
@@ -85,7 +83,7 @@ void studentInput(struct TStudent *stud)
 }
 
 /*
-    Función: añade un nuevo estudiante a la base de datos/archivo
+    Function: adds a new student to the database/file
 */
 void add()
 {
@@ -95,7 +93,7 @@ void add()
     newStudent.id = 100;
     fflush(stdin);
 
-    // Abre el archivo para buscar el id y asignarlo
+    // Open the file to search for the id and assign it
     FILE *fichero = fopen("db.txt", "r");
     if (fichero != NULL)
     {
@@ -124,12 +122,10 @@ void add()
 
     fprintf(fichero, "%d. %s|%s\n", newStudent.id, newStudent.name, newStudent.dept);
     fclose(fichero);
-
-    return;
 }
 
 /*
-    Función: abre un archivo y lo imprime línea a línea
+    Function: opens a file and prints it line by line
 */
 void modStudent()
 {
@@ -178,8 +174,8 @@ void modStudent()
 }
 
 /*
-    Función: funcion que borra un estudiante segun su id
-             Creamos un archivo temporal para copiar todos menos el pedido
+Function: function that deletes a student according to its id
+            We create a temporary file to copy all but the request
 */
 void deleteStudent()
 {
@@ -261,4 +257,3 @@ void showStudent(const char *filename)
 
     fclose(fichero);
 }
-// endregion: --- Lib functions

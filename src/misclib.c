@@ -1,9 +1,9 @@
 #include "../include/misclib.h"
 
 /*
-    Función: imprime X carateres N veces
-    -ch: caracter a imprimir
-    -n: veces a imprimir
+    Function: prints X characters N times
+    -ch: character to print
+    -n: times to print
 */
 void printChar(char ch, int n)
 {
@@ -14,9 +14,9 @@ void printChar(char ch, int n)
 }
 
 /*
-    Función: comprueba si un archivo existe
-    -filename: archivo a buscar
-    return: la variable exits en falso si no lo puede abrir, true si lo puede abrir
+    Function: checks if a file exists
+    -filename: file to search for
+    return: exits variable to false if you can't open it, true if you can open it
 */
 bool checkIfFileExists(const char *filename)
 {
@@ -31,8 +31,8 @@ bool checkIfFileExists(const char *filename)
 }
 
 /*
-    Función: abre un archivo y lo imprime linea a linea
-    -filename: archivo a imprimir
+    Function: opens a file and prints it line by line
+    -filename: file to print
 */
 void printFileContent(const char *filename)
 {
@@ -54,10 +54,10 @@ void printFileContent(const char *filename)
 }
 
 /*
-    Función: gestiona las peticiones basicas de input
-    -prompt: string que escribe el mensaje por pantalla a escribir
-    -format: el formato de dato -> "%d", "%f"...
-    -data: donde se va a guardar lo que se pide
+    Function: handles basic input requests
+    -prompt: string that writes the message to be written on the screen
+    -format: the data format -> "%d", "%f"...
+    -data: where to save what is being requested
 */
 void manageInput(const char *prompt, const char *format, void *data)
 {
@@ -71,7 +71,7 @@ void manageInput(const char *prompt, const char *format, void *data)
 }
 
 /*
-    Función: saaca por pantalla un archivo
+    Function: display a file on the screen
 */
 void show(const char *filename)
 {

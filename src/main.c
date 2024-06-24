@@ -5,13 +5,8 @@
 
 int main()
 {
-    // region: --- Main func variables
 
     char option;
-
-    // endregion: --- Main func variables
-
-    // region: --- Main Title TUI
 
     title();
     printf("\n\n\t\t\t\t2022-2023 Academic Year");
@@ -20,8 +15,6 @@ int main()
     printChar('=', 39);
     printf("\n\n\t\t\tPulsa cualquier tecla para continuar");
     getchar();
-
-    // endregion: --- Main Title TUI
 
     while (1)
     {
