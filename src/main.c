@@ -2,7 +2,7 @@
 #include <misclib.h>
 #include <raylib.h>
 #define RAYGUI_IMPLEMENTATION
-#include <raygui.h>
+#include "raygui.h"
 
 #define sleep_time 1
 
