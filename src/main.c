@@ -18,6 +18,8 @@ int main(void)
     printf("\n\n\t\t\tPulsa cualquier tecla para continuar");
     getchar();
 
+    uint32_t buf[W * H];
+    struct fenster f = { .title = "Test Window", .width = W, .height = H, .buf = buf };
     while (1)
     {
         title();
@@ -30,8 +32,6 @@ int main(void)
             return EXIT_FAILURE;
         }
 
-        uint32_t buf[W * H];
-        struct fenster f = { .title = "Test Window", .width = W, .height = H, .buf = buf };
         switch (option)
         {
             case '1':
@@ -55,12 +55,9 @@ int main(void)
 
             case '8':
                 fenster_open(&f);
-                while (fenster_loop(&f) == 0) {
-                    for (int i = 0; i < W; i++) {
-                        for (int j = 0; j < H; j++) {
-                            fenster_pixel(&f, i, j) = rand();
-                        }
-                    }
+                while (fenster_loop(&f) == 0)
+                {
+
                 }
                 fenster_close(&f);
                 break;
