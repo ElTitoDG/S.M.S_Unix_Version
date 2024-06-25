@@ -1,6 +1,6 @@
-#include "include/smslib.h"
-#include "include/misclib.h"
-#include "deps/fenster.h"
+#include <smslib.h>
+#include <misclib.h>
+#include <fenster.h>
 
 #define sleep_time 1
 #define W 800
@@ -77,6 +77,4 @@ int main(void)
         printf("\n\t\tPresione cualquier tecla para continuar");
         getchar();
     }
-
-    return 0;
 }

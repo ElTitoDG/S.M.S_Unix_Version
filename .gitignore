@@ -61,3 +61,4 @@ db.txt
 tests/test_module
 tests/students.txt
 students.txt
+cmake-build-debug
