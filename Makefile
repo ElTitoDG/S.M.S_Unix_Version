@@ -61,7 +61,7 @@ CFLAGS := -O3 $(STD) $(STACK) $(WARNS)
 DEBUG := -g3 -DDEBUG=1
 
 # Dependency libraries
-LIBS :=  -I./deps/GLFW -framework Cocoa -framework OpenGL -framework IOKit -L./deps/GLFW/lib -lglfw3
+LIBS := -framework Cocoa -framework OpenGL -framework IOKit -framework AudioToolbox
 
 # %.o file names
 NAMES := $(notdir $(basename $(wildcard $(SRCDIR)/*.$(SRCEXT))))

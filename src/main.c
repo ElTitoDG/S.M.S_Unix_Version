@@ -1,20 +1,10 @@
 #include "include/smslib.h"
 #include "include/misclib.h"
-#include "deps/GLFW/glfw3.h"
-#define NK_IMPLEMENTATION
-#include "deps/nuklear.h"
+#include "deps/fenster.h"
 
 #define sleep_time 1
-
-static void error_callback(int error, const char* description)
-{
-    fputs(description, stderr);
-}
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
-}
+#define W 800
+#define H 600
 
 int main(void)
 {
@@ -40,6 +30,8 @@ int main(void)
             return EXIT_FAILURE;
         }
 
+        uint32_t buf[W * H];
+        struct fenster f = { .title = "Test Window", .width = W, .height = H, .buf = buf };
         switch (option)
         {
             case '1':
@@ -62,29 +54,15 @@ int main(void)
                 break;
 
             case '8':
-                glfwInit();
-
-                GLFWwindow* window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
-                glfwSetErrorCallback(error_callback);
-                if (!glfwInit())
-                    return EXIT_FAILURE;
-                if (!window)
-                {
-                    glfwTerminate();
-                    return EXIT_FAILURE;
+                fenster_open(&f);
+                while (fenster_loop(&f) == 0) {
+                    for (int i = 0; i < W; i++) {
+                        for (int j = 0; j < H; j++) {
+                            fenster_pixel(&f, i, j) = rand();
+                        }
+                    }
                 }
-                glfwMakeContextCurrent(window);
-                glfwSetKeyCallback(window, key_callback);
-                while (!glfwWindowShouldClose(window))
-                {
-                    glClear(GL_COLOR_BUFFER_BIT);
-                    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-
-                    glfwPollEvents();
-                    glfwSwapBuffers(window);
-                }
-                glfwDestroyWindow(window);
-                glfwTerminate();
+                fenster_close(&f);
                 break;
             case '7':
                 if (checkIfFileExists("test/a.txt"))
