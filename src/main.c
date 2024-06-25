@@ -2,7 +2,7 @@
 #include <misclib.h>
 #include <raylib.h>
 #define RAYGUI_IMPLEMENTATION
-#include "raygui.h"
+#include <raygui.h>
 
 #define sleep_time 1
 
@@ -18,8 +18,6 @@ int main(void)
     printf("\n\n\t\t\tPulsa cualquier tecla para continuar");
     getchar();
 
-    InitWindow(400, 200, "raygui - controls test suite");
-    SetTargetFPS(60);
     bool showMessageBox = false;
     while (1)
     {
@@ -33,6 +31,8 @@ int main(void)
             return EXIT_FAILURE;
         }
 
+        InitWindow(400, 200, "raygui - controls test suite");
+        SetTargetFPS(60);
         switch (option)
         {
             case '1':
@@ -66,12 +66,9 @@ int main(void)
 
                     if (showMessageBox)
                     {
-                        int result = GuiMessageBox((Rectangle){ 85, 70, 250, 100 },
-                                                   "#191#Message Box", "Hi! This is a message!", "Nice;Cool");
-
+                        int result = GuiMessageBox((Rectangle){ 85, 70, 250, 100 }, "#191#Message Box", "Hi! This is a message!", "Nice;Cool");
                         if (result >= 0) showMessageBox = false;
                     }
-
                     EndDrawing();
                 }
                 CloseWindow();

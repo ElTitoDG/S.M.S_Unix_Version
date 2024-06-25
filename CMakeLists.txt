@@ -48,6 +48,7 @@ target_include_directories(
         ${PROJECT_NAME} PUBLIC
         #glad
         include
+        deps
         #${SDL2}/Versions/A/Headers
         #${SDL2_image}/Versions/A/Headers
         #${SDL2_ttf}/Versions/A/Headers
