@@ -39,9 +39,9 @@ void printChar(char ch, int n);
 void title();
 void mainMenu();
 void password();
-void add();
-void modStudent();
-void deleteStudent();
+void add(const char *filePath);
+void modStudent(const char *filePath);
+void deleteStudent(const char *filePath);
 void showStudent(const char *filename);
 
 #endif // __SMSLIB_H__

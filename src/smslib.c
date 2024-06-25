@@ -85,7 +85,7 @@ void studentInput(struct TStudent *stud)
 /*
     Function: adds a new student to the database/file
 */
-void add()
+void add(const char *filePath)
 {
     title();
 
@@ -94,8 +94,8 @@ void add()
     fflush(stdin);
 
     // Open the file to search for the id and assign it
-    FILE *fichero = fopen("db.txt", "r");
-    if (fichero != NULL)
+    FILE *fichero;
+    if ((fichero = fopen(filePath, "r")) != NULL)
     {
         char line[256];
         while (fgets(line, sizeof(line), fichero))
@@ -113,8 +113,7 @@ void add()
 
     printf("Datos: %d. %s|%s\n", newStudent.id, newStudent.name, newStudent.dept);
 
-    fichero = fopen("db.txt", "a+");
-    if (fichero == NULL)
+    if ((fichero = fopen("db.txt", "a+")) == NULL)
     {
         printf("No se puede abrir el archivo \n");
         return;
@@ -127,27 +126,33 @@ void add()
 /*
     Function: opens a file and prints it line by line
 */
-void modStudent()
+void modStudent(const char *filePath)
 {
     title();
 
-    FILE * fichero = fopen("db.txt", "r+");
-    if (fichero == NULL)
+    FILE *fichero;
+    if ((fichero = fopen(filePath, "r")) == NULL)
     {
         perror("\nNo se puede abrir el archivo\n");
+        return;
+    }
+
+    FILE *temp;
+    if ((temp = fopen("temp.txt", "w")) == NULL)
+    {
+        perror("\nNo se puede crear el archivo temporal\n");
+        fclose(temp);
         return;
     }
 
     char line[256];
     struct TStudent mStudent;
     int found = 0, studentID;
-    long int pos;
 
     manageInput("Introduzca el ID del estudiante a modificar: ", "%d", &studentID);
 
     while (fgets(line, sizeof(line), fichero) != NULL)
     {
-        pos = ftell(fichero);
         sscanf(line, "%d. %[^|]|%[^\n]", &mStudent.id, mStudent.name, mStudent.dept);
 
         if (mStudent.id == studentID)
@@ -155,39 +160,44 @@ void modStudent()
             found = 1;
 
             studentInput(&mStudent);
-
             printf("Datos: %d. %s|%s\n", mStudent.id, mStudent.name, mStudent.dept);
-
-            fseek(fichero, pos - strlen(line), SEEK_SET);
-            fprintf(fichero, "%d. %s|%s", mStudent.id, mStudent.name, mStudent.dept);
-            break;
+            fprintf(temp, "%d. %s|%s\n", mStudent.id, mStudent.name, mStudent.dept);
         }
+        else
+            fprintf(temp, "%s", line);
     }
 
-    fprintf(fichero, "\n");
     fclose(fichero);
+    fclose(temp);
 
     if (!found)
+    {
         printf("Estudiante con ID <%d> no encontrado.\n", studentID);
+        remove("temp.txt");
+    }
     else
+    {
+        remove(filePath);
+        rename("temp.txt", filePath);
         printf("Estudiante con ID <%d> actualizado correctamente.\n", studentID);
+    }
 }
 
 /*
 Function: function that deletes a student according to its id
             We create a temporary file to copy all but the request
 */
-void deleteStudent()
+void deleteStudent(const char *filePath)
 {
-    FILE *fichero = fopen("db.txt", "r");
-    if (fichero == NULL)
+    FILE *fichero;
+    if ((fichero = fopen(filePath, "r")) == NULL)
     {
         perror("\nNo se puede abrir el archivo\n");
         return;
     }
 
-    FILE *temp = fopen("temp.txt", "w");
-    if (temp == NULL)
+    FILE *temp;
+    if ((temp = fopen("temp.txt", "w")) == NULL)
     {
         perror("\nNo se puede crear el archivo temporal\n");
         fclose(fichero);
@@ -225,14 +235,14 @@ void deleteStudent()
     }
 }
 
-void showStudent(const char *filename)
+void showStudent(const char *filePath)
 {
     char line[256];
     struct TStudent student;
     int found = 0, studentID;
 
-    FILE *fichero = fopen(filename, "r");
-    if (fichero == NULL)
+    FILE *fichero;
+    if ((fichero = fopen(filePath, "r")) == NULL)
     {
         perror("No se ha podido abrir el archivo\n");
         return;
@@ -253,7 +263,7 @@ void showStudent(const char *filename)
     }
 
     if (!found)
-        printf("Estudiente con ID %d no encontrado.\n", student.id);
+        printf("Estudiante con ID %d no encontrado.\n", student.id);
 
     fclose(fichero);
 }

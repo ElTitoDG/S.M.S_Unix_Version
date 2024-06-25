@@ -5,7 +5,6 @@
 
 int main()
 {
-
     char option;
 
     title();
@@ -30,65 +29,39 @@ int main()
 
         switch (option)
         {
-        case '1':
-            add();
+            case '1':
+                add("db.txt");
+                break;
+            case '2':
+                modStudent("db.txt");
+                break;
+            case '3':
+                show("db.txt");
+                break;
+            case '4':
+                showStudent("db.txt");
+                break;
+            case '5':
+                deleteStudent("db.txt");
 
-            sleep(sleep_time);
-            printf("\n\t\tPresione cualquier tecla para continuar");
-            getchar();
-            break;
-        case '2':
-            modStudent();
-
-            sleep(sleep_time);
-            printf("\n\t\tPresione cualquier tecla para continuar");
-            getchar();
-            break;
-        case '3':
-            show("db.txt");
-
-            sleep(sleep_time);
-            printf("\n\t\tPresione cualquier tecla para continuar");
-            getchar();
-            break;
-        case '4':
-            showStudent("db.txt");
-
-            sleep(sleep_time);
-            printf("\n\t\tPresione cualquier tecla para continuar");
-            getchar();
-            break;
-        case '5':
-            deleteStudent();
-
-            sleep(sleep_time);
-            printf("\n\t\tPresione cualquier tecla para continuar");
-            getchar();
-            break;
-        case '6':
-            password();
-
-            sleep(sleep_time);
-            printf("\n\t\tPresione cualquier tecla para continuar");
-            getchar();
-            break;
-        case '7':
-            if (checkIfFileExists("test/a.txt"))
-                printFileContent("test/a.txt");
-            else
-                printf("not exits");
-
-            sleep(sleep_time);
-            printf("\n\t\tPresione cualquier tecla para continuar");
-            getchar();
-            break;
-        case 'q':
-            return EXIT_SUCCESS;
-        default:
-            printf("\n\t\tNinguna opción seleccionada");
-            printf("\n\t\tPresione cualquier tecla para continuar\n\n\n");
-            sleep(sleep_time);
-            getchar();
+                break;
+            case '6':
+                password();
+                break;
+            case '7':
+                if (checkIfFileExists("test/a.txt"))
+                    printFileContent("test/a.txt");
+                else
+                    printf("not exits");
+                break;
+            case 'q':
+                return EXIT_SUCCESS;
+            default:
+                printf("\n\t\tNinguna opción seleccionada");
+                sleep(sleep_time);
         }
+        sleep(sleep_time);
+        printf("\n\t\tPresione cualquier tecla para continuar");
+        getchar();
     }
 }
