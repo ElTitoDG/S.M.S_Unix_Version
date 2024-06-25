@@ -1,35 +1,60 @@
 cmake_minimum_required(VERSION 3.28)
 project(S_M_S_Gui_Version VERSION 0.5)
 
-set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD 99)
 
 file(GLOB_RECURSE SOURCES "src/*.c")
-add_executable(S_M_S_Gui_Version ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES})
 
-add_subdirectory(deps/glad/)
+#[[add_subdirectory(deps/glad/)
 set(SDL2 /Library/Frameworks/SDL2.framework)
 set(SDL2_image /Library/Frameworks/SDL2_image.framework)
 set(SDL2_ttf /Library/Frameworks/SDL2_ttf.framework)
-set(SDL2_mixer /Library/Frameworks/SDL2_mixer.framework)
-set(FRAMEWORK_LIBS "-framework Cocoa -framework OpenGL -framework IOKit -framework AudioToolbox")
+set(SDL2_mixer /Library/Frameworks/SDL2_mixer.framework)]]
 
 target_link_libraries(
-        S_M_S_Gui_Version PUBLIC
-        glad
-        ${SDL2}/Versions/A/SDL2
-        ${SDL2_image}/Versions/A/SDL2_image
-        ${SDL2_ttf}/Versions/A/SDL2_ttf
-        ${SDL2_mixer}/Versions/A/SDL2_mixer
-        ${FRAMEWORK_LIBS}
+        ${PROJECT_NAME}
+        #glad
+        raylib
+        #${SDL2}/Versions/A/SDL2
+        #${SDL2_image}/Versions/A/SDL2_image
+        #${SDL2_ttf}/Versions/A/SDL2_ttf
+        #${SDL2_mixer}/Versions/A/SDL2_mixer
 )
 
 target_include_directories(
         S_M_S_Gui_Version PUBLIC
-        glad
+        #glad
         deps
         include
-        ${SDL2}/Versions/A/Headers
-        ${SDL2_image}/Versions/A/Headers
-        ${SDL2_ttf}/Versions/A/Headers
-        ${SDL2_mixer}/Versions/A/Headers
+        #${SDL2}/Versions/A/Headers
+        #${SDL2_image}/Versions/A/Headers
+        #${SDL2_ttf}/Versions/A/Headers
+        #${SDL2_mixer}/Versions/A/Headers
 )
+
+# Dependencies
+set(RAYLIB_VERSION 5.0)
+find_package(raylib ${RAYLIB_VERSION} QUIET) # QUIET or REQUIRED
+if (NOT raylib_FOUND) # If there's none, fetch and build raylib
+    include(FetchContent)
+    FetchContent_Declare(
+            raylib
+            DOWNLOAD_EXTRACT_TIMESTAMP OFF
+            URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
+    )
+    FetchContent_GetProperties(raylib)
+    if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
+        set(FETCHCONTENT_QUIET NO)
+        FetchContent_Populate(raylib)
+        set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
+        add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
+    endif()
+endif()
+
+# Checks if OSX and links appropriate frameworks (Only required on MacOS)
+if (APPLE)
+    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
+    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
+    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
+endif()

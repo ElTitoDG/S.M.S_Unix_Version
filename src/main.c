@@ -1,10 +1,10 @@
 #include <smslib.h>
 #include <misclib.h>
-#include <fenster.h>
+#include <raylib.h>
+#define RAYGUI_IMPLEMENTATION
+#include <raygui.h>
 
 #define sleep_time 1
-#define W 800
-#define H 600
 
 int main(void)
 {
@@ -18,8 +18,9 @@ int main(void)
     printf("\n\n\t\t\tPulsa cualquier tecla para continuar");
     getchar();
 
-    uint32_t buf[W * H];
-    struct fenster f = { .title = "Test Window", .width = W, .height = H, .buf = buf };
+    InitWindow(400, 200, "raygui - controls test suite");
+    SetTargetFPS(60);
+    bool showMessageBox = false;
     while (1)
     {
         title();
@@ -54,12 +55,26 @@ int main(void)
                 break;
 
             case '8':
-                fenster_open(&f);
-                while (fenster_loop(&f) == 0)
+                while (!WindowShouldClose())
                 {
+                    // Draw
+                    //----------------------------------------------------------------------------------
+                    BeginDrawing();
+                    ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 
+                    if (GuiButton((Rectangle){ 24, 24, 120, 30 }, "#191#Show Message")) showMessageBox = true;
+
+                    if (showMessageBox)
+                    {
+                        int result = GuiMessageBox((Rectangle){ 85, 70, 250, 100 },
+                                                   "#191#Message Box", "Hi! This is a message!", "Nice;Cool");
+
+                        if (result >= 0) showMessageBox = false;
+                    }
+
+                    EndDrawing();
                 }
-                fenster_close(&f);
+                CloseWindow();
                 break;
             case '7':
                 if (checkIfFileExists("test/a.txt"))
