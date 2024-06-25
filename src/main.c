@@ -1,9 +1,10 @@
 #include "../include/smslib.h"
 #include "../include/misclib.h"
+#include "../deps/GLFW/glfw3.h"
 
 #define sleep_time 1
 
-int main()
+int main(void)
 {
     char option;
 
@@ -43,10 +44,29 @@ int main()
                 break;
             case '5':
                 deleteStudent("db.txt");
-
                 break;
             case '6':
                 password();
+                break;
+
+            case '8':
+                glfwInit();
+
+                GLFWwindow* window = glfwCreateWindow(1280, 720, "Todo", NULL, NULL);
+
+                glfwMakeContextCurrent(window);
+
+                while (!glfwWindowShouldClose(window))
+                {
+                    glClear(GL_COLOR_BUFFER_BIT);
+                    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+                    glfwPollEvents();
+                    glfwSwapBuffers(window);
+                }
+
+                glfwDestroyWindow(window);
+                glfwTerminate();
                 break;
             case '7':
                 if (checkIfFileExists("test/a.txt"))
@@ -64,4 +84,6 @@ int main()
         printf("\n\t\tPresione cualquier tecla para continuar");
         getchar();
     }
+
+    return 0;
 }

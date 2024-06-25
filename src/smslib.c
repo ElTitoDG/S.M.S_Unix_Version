@@ -31,6 +31,7 @@ void mainMenu()
     printf("\n\n\t\t\t\t5. Remove Student");
     printf("\n\n\t\t\t\t6. Change Password");
     printf("\n\n\t\t\t\t7. Info");
+    printf("\n\n\t\t\t\t8. GUI");
     printf("\n\n\t\t\t\tq. Logout\n\n\t");
     printChar('*', 65);
 
