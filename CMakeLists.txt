@@ -38,6 +38,8 @@ target_link_libraries(
         ${PROJECT_NAME}
         #glad
         raylib
+        gtk
+        gtk+
         #${SDL2}/Versions/A/SDL2
         #${SDL2_image}/Versions/A/SDL2_image
         #${SDL2_ttf}/Versions/A/SDL2_ttf
@@ -49,6 +51,7 @@ target_include_directories(
         #glad
         include
         deps
+        gtk+
         #${SDL2}/Versions/A/Headers
         #${SDL2_image}/Versions/A/Headers
         #${SDL2_ttf}/Versions/A/Headers
