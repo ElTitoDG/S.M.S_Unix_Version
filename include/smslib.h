@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <curses.h>
+#include <SDL.h>
 
 // region: --- Terminal Colors
 

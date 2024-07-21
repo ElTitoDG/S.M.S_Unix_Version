@@ -80,3 +80,32 @@ void show(const char *filename)
     else
         printFileContent(filename);
 }
+
+void gui()
+{
+    bool isRunning = true;
+    SDL_Event event;
+
+    SDL_Init(SDL_INIT_VIDEO);
+
+    SDL_Window *window = SDL_CreateWindow(
+        "Test GUI",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        1280, 800,
+        0);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+
+    while (isRunning)
+    {
+        SDL_PollEvent(&event);
+        switch (event.type)
+        {
+            case SDL_QUIT:
+                isRunning = false;
+                break;
+        }
+    }
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+}
